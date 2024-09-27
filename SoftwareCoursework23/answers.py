@@ -12,7 +12,7 @@ def readFile():
         daysOpen = []
         height = []
 
-        reader = csv.reader(file)
+        reader = csv.reader(file) #Reading from CSV 
         for row in reader:
             attraction.append(row[0])
             category.append(row[1])
@@ -22,7 +22,7 @@ def readFile():
     
     return(attraction, category, visitors, daysOpen, height)
 
-
+# Finds and displays least visited attraction(s)
 def least_visited(attraction, visitors):
     names = "" # names of lowest attraction(s)
     min = visitors[0]
@@ -36,18 +36,23 @@ def least_visited(attraction, visitors):
         
     print("The least visited attraction(s): " + names)
 
+
+# Finds and displays most visited attraction(s)
 def most_visited(attraction, visitors):
     names = "" # names of highest attraction(s)
     max = visitors[0]
-    for ride in range(1, len(visitors)):
-        if visitors[ride] > max:
-            max = visitors[ride]
-            names = attraction[ride]
-        elif visitors[ride] == max:
-            names = names + ", " + attraction[ride]
+
+    for index in range(1, len(visitors)):
+        if visitors[index] > max:
+            max = visitors[index]
+            names = attraction[index]
+        elif visitors[index] == max:
+            names = names + ", " + attraction[index]
         
     print("The most visited attraction(s): " + names)
 
+
+# Writes roller coasters to service within 7 days to file
 def servicing(attraction, category, daysOpen):
     with open('Mock Coursework 23/service.csv', 'w') as file:
         writer = csv.writer(file)
@@ -57,6 +62,7 @@ def servicing(attraction, category, daysOpen):
                 if (90-days) <= 7:
                     writer.writerow([attraction[index]])
 
+# Counts and displays attractions with height restriction >= 1m
 def check_height(height):
     count = 0
     for currentHeight in height:
@@ -65,9 +71,9 @@ def check_height(height):
     print(count)
 
 
-
 attraction, category, visitors, daysOpen, height = readFile() # assigning multiple returned arrays to use later
 least_visited(attraction, visitors)
 most_visited(attraction, visitors)
 servicing(attraction, category, daysOpen)
 check_height(height)
+
