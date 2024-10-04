@@ -1,3 +1,6 @@
+# String splicing to generate username
+
+
 import random
 
 def generate_username(first_name, last_name):

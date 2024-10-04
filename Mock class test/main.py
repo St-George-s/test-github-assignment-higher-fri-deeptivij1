@@ -1,3 +1,5 @@
+# Arrays of records handling, reader csv, writing text file
+
 import csv 
 
 class Order():

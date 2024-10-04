@@ -1,3 +1,5 @@
+# Reading CSV file, creating Country object, writing to text file
+
 import csv 
 
 class Country:
