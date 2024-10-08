@@ -13,7 +13,7 @@ def readfile():
         reader = csv.reader(file)
         next(reader)  # Skips the header
         for row in reader:
-            studentID.append(row[0])
+            studentID.append(row[0]) # CAST HERE AS ALL ARE STRINGS FROM CSV
             firstName.append(row[1])
             lastName.append(row[2])
             grade.append((row[3]))

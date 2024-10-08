@@ -17,7 +17,7 @@ def readStudentData():
         for row in reader:
             # Creates a Student object for each row of info 
             # + adds it to array of records
-            student_row = Student(row[0], row[1], row[2], row[3])
+            student_row = Student(row[0], row[1], row[2], row[3]) # CAST HERE AS ALL ARE STRINGS FROM CSV
             students.append(student_row)
     
     return students
