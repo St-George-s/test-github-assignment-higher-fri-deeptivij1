@@ -1,6 +1,7 @@
 # Implementation Part B 
 import csv 
 
+
 # Reading data from CSV into 3 parallel arrays
 def readGameDataFromCSV():
     gameTitles = []

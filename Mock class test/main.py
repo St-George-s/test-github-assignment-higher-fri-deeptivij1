@@ -12,7 +12,7 @@ class Order():
         
 
 
-
+# reading into array of records from CSV
 def readOrdersFromCSV():
 
     with open('Mock class test/ordersExtended.csv', 'r') as f:
@@ -35,6 +35,7 @@ def findMaxOrderWithTv(orders):
 
     print(maxOrder.amountSpent) # just print price of max record
 
+# writing into TXT file 
 def findDiscounts(orders):
     with open('Mock class test/discounts.txt', 'w') as file:
         for order in orders:
