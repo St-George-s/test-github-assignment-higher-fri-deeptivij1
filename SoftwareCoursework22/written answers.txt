@@ -1,0 +1,21 @@
+Task 1: software design and development
+
+
+PART A 
+1a:
+
+2 assumptions about the data in the text file 
+- All the data in the file is not blank
+- Each nearest town and mammal are one of the options provided
+
+1b: 
+
+Design technique to convert to upper case strings
+DEFINE convert_strings(inputted_word):
+    inputted_word[0] = upper(inputted_word[0])
+    
+    return inputted_word
+
+PART B
+1c: code written on answers.py 
+
