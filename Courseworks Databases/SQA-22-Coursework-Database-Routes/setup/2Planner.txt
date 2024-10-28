@@ -1,0 +1,39 @@
+CREATE TABLE Planner (
+    plannerNo INT NOT NULL,
+    forename VARCHAR(25) NOT NULL,
+    surname VARCHAR(25) NOT NULL,
+    telNo VARCHAR(12) NOT NULL,
+    regYear INT NOT NULL,
+    -- Assuming plannerNo is the primary key
+    PRIMARY KEY (plannerNo)
+    -- If Planner references another table, include the foreign key here.
+    -- Example:
+    -- FOREIGN KEY (fieldName) REFERENCES OtherTable(otherFieldName)
+);
+
+
+-- The following may be added to the CREATE statement
+-- Primary Key Syntax (added after field name and NOT NULL)
+--     PRIMARY KEY (fieldName)
+--          or for compound PK
+--     CONSTRAINT PK_compoundFieldName PRIMARY KEY (field1,field2)
+-- Foreign Key Syntax (added after field list)
+--     FOREIGN KEY (field name) REFERENCES tableName(fieldName)
+-- Text Field Max Size
+--     Edit (255) to required length
+-- Validation of length of text (added after create statement as new statement
+--     CHECK (CHAR_LENGTH(fieldName) > value)
+-- Range Check (added after field list)
+--     CHECK (fieldName >= value)
+--     CHECK (fieldName >= value AND fieldName <= value2)
+-- Restricted choice
+--     CHECK(fieldName in ('value1','value2','value3')) 
+
+-- Note
+-- At N5 Check constraints (that are ignored by a MySQL server) 
+-- are being used instead of triggers.
+
+INSERT INTO Planner VALUES(101,"Heidi","Benton","07555 575630",1997);
+INSERT INTO Planner VALUES(102,"Takeshi","Chen","07183 671292",2006);
+INSERT INTO Planner VALUES(103,"Selena","Booker","07957 924936",2002);
+INSERT INTO Planner VALUES(104,"Daniel","Little","07600 746926",2009);

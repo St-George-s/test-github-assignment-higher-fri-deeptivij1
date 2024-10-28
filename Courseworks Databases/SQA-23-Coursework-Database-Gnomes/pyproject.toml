@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "spotify_database_project"
+version = "0.1.0"
+description = "A project to set up and interact with an SQL database"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+prettytable = "*"
+
+[tool.poetry.scripts]
+runproject = "setup.main:main"  # Points to main() function in setup/main.py
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
