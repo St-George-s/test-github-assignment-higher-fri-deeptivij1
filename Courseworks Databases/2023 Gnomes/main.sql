@@ -11,3 +11,6 @@ WHERE unitPrice =
 (   SELECT MAX(unitPrice)
     FROM Gnome
 );
+
+SELECT emailAddress, orderID, quantity AS [Quantity]
+FROM Customer, Orders, GnomePurchase, Gnome
