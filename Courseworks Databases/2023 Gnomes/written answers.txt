@@ -1,0 +1,7 @@
+Task 2: database design and development
+
+
+PART A 
+2a: A query to display total cost of each order
+    A query to update customer information
+
