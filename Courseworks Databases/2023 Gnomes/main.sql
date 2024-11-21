@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- -- CustOrder is Orders table
 
 -- 2b: Lists of gnomeNames and quantities with solar in description
@@ -25,3 +26,6 @@ WHERE Orders.orderID="ord0024"
 AND Customer.customerID=Orders.customerID
 AND Orders.orderID=GnomePurchase.orderID
 AND Gnome.gnomeID=GnomePurchase.gnomeID;
+=======
+DESCRIBE ALL TABLES;
+>>>>>>> 8255f73 (-)
