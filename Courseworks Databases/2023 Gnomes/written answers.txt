@@ -5,3 +5,5 @@ PART A
 2a: A query to display total cost of each order
     A query to update customer information
 
+PART B
+2b: code written on main.sql
