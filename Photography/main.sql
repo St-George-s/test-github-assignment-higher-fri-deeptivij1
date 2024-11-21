@@ -1,1 +1,1 @@
-DESCRIBE ALL TABLES;
+SELECT photographer_id FROM Photographers WHERE experience_years > 5;
