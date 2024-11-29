@@ -1,0 +1,17 @@
+Task 2: database design and development
+
+
+PART A
+2a: A query to calculate total days of hosting event for each city 
+    A query to update details of swimmers
+
+2b: Swimmer --< Result >-- Race
+A swimmer's ID can be in many results but a result can contain one swimmer. 
+A race's ID can be in multiple results but a result can only have one race.
+
+PART B
+2b,c,d: code written on main.sql
+2e:
+(i) The unit price may have changed compared to then
+(ii) Add a column for total cost of order when it was made
+ 
