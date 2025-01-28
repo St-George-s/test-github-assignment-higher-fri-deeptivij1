@@ -5,8 +5,8 @@ PART A
 1a:
 
 2 assumptions about the data in the text file 
-- All the data in the file is not blank
-- Each nearest town and mammal are one of the options provided
+- Date is in the correct format 
+- Age is an integer
 
 1b: 
 
@@ -17,5 +17,5 @@ DEFINE convert_strings(inputted_word):
     return inputted_word
 
 PART B
-1c: code written on answers.py 
+1c: code written on answers.py
 

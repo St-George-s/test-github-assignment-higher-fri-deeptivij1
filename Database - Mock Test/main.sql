@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 -- 3.1 Write an SQL Query to list all events, hosting shop names, max attendees and date
 SELECT E.eventName AS [Event Name], S.name AS [Shop Name], E.maxAttendees AS [Max Attendees], E.eventDate AS [Event Date]
 FROM Event E, Shop S
@@ -25,5 +24,3 @@ FROM Shop S, Booking B, Event E
 WHERE S.shopID = E.shopID
 AND E.eventID = B.eventID
 GROUP BY S.name;
-=======
->>>>>>> a8ee91c (Added Class Test)
