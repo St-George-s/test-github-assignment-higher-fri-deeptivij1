@@ -11,9 +11,10 @@ PART A
 1b: 
 
 Design technique to convert to upper case strings
-DEFINE convert_strings(inputted_word):
-    inputted_word[0] = upper(inputted_word[0])
-    
+def convert_strings(inputted_word):
+    if inputted_word[0] != inputted_word[0].upper():
+        inputted_word[0] = inputted_word[0].upper()
+
     return inputted_word
 
 PART B

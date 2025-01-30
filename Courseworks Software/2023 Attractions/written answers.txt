@@ -26,7 +26,7 @@ OUT:
 PART B (in answers.py)
 
 1c(i) - ASK HOW TO WRITE TO CSV, ONENOTE METHOD SEPARATED EACH LETTER WITH ',' 
-        writing with writer function needds an array so convert it with []
+        writing with writer function needs an array so convert it with []
 1c(ii)
 
 1d: 

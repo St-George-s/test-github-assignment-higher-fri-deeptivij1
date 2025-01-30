@@ -15,7 +15,7 @@ class Order():
 # reading into array of records from CSV
 def readOrdersFromCSV():
 
-    with open('Mock class test/ordersExtended.csv', 'r') as f:
+    with open('Mock class test AoR/ordersExtended.csv', 'r') as f:
         orders = [] # array of records
         reader = csv.reader(f) # premade reader using f to refer to file
         next(reader)
@@ -37,7 +37,7 @@ def findMaxOrderWithTv(orders):
 
 # writing into TXT file 
 def findDiscounts(orders):
-    with open('Mock class test/discounts.txt', 'w') as file:
+    with open('Mock class test AoR/discounts.txt', 'w') as file:
         for order in orders:
             if int(order.id) % 5 == 0:
                 file.write(order.id + "-" + order.product[:3] + "-DISCOUNT CODE ASSIGNED" + "\n")

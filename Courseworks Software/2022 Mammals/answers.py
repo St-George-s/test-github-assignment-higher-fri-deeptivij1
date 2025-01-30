@@ -14,7 +14,7 @@ class sighting:
 def readData():
     sightings = []
 
-    with open("SoftwareCoursework22/mammals.txt", 'r') as file:
+    with open("Courseworks Software/2022 Mammals/mammals.txt", 'r') as file:
         reader = csv.reader(file) #Reading from CSV 
         for row in reader:
             # Creates a sighting object for each row of info 
@@ -25,7 +25,13 @@ def readData():
     return sightings
 
 def findOldest(sightings):
-    pass
+    maxSighting = sightings[0] # setting highest sighting to whole of record 1
+    for sighting in sightings:
+        if sighting.age > maxSighting.age: #if current walker age > oldest walking age 
+            maxSighting = sighting # change the max record to the current record
+
+    print(maxSighting.age) # just print age of record
+
 
 def displayDates(sightings):
     pass
@@ -35,3 +41,4 @@ def numSightings(sightings):
 
 
 sightings = readData()
+findOldest(sightings)
