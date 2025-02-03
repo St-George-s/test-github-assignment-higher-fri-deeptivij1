@@ -13,7 +13,7 @@ PART A
 Design technique to convert to upper case strings
 def convert_strings(inputted_word):
     if inputted_word[0] != inputted_word[0].upper():
-        inputted_word[0] = inputted_word[0].upper()
+        inputted_word = inputted_word[0].upper() + inputted_word[1:]
 
     return inputted_word
 
