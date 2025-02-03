@@ -19,7 +19,7 @@ def readData():
         for row in reader:
             # Creates a sighting object for each row of info 
             # + adds it to array of records
-            sighting_row = sighting(row[0], row[1], row[2], row[3])
+            sighting_row = sighting(row[0], row[1], row[2], int(row[3]))
             sightings.append(sighting_row)
 
     return sightings
@@ -32,13 +32,25 @@ def findOldest(sightings):
 
     print(maxSighting.age) # just print age of record
 
+def upperCase(word):
+    firstChar = ord(word[0])
+    if firstChar >= 97 and firstChar <= 122:
+        firstChar = firstChar - 32
+        word = chr(firstChar) + word[1:]
+        print(word)
+    return word
+
+
 
 def displayDates(sightings):
-    pass
+    town = input("Enter town: ")
+
 
 def numSightings(sightings):
     pass
 
 
-sightings = readData()
-findOldest(sightings)
+# sightings = readData()
+# findOldest(sightings)
+
+upperCase("hello")
