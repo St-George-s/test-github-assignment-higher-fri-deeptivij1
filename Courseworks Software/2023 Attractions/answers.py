@@ -56,7 +56,7 @@ def most_visited(attraction, visitors):
 def servicing(attraction, category, daysOpen):
     with open('SoftwareCoursework23/service.csv', 'w') as file:
         writer = csv.writer(file)
-        for index in  range(len(attraction)):
+        for index in range(len(attraction)):
             if category[index] == "Roller Coaster":
                 days = daysOpen[index] % 90
                 if (90-days) <= 7: # checks if servicing required within next week
