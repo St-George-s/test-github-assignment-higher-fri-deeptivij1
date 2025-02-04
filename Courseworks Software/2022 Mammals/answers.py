@@ -1,6 +1,6 @@
 # Part B 
 # 1c
-import csv 
+import csv # MAKE SURE TO IMPORT TO READ
 
 # Defining sighting object
 class sighting:
@@ -53,10 +53,22 @@ def displayDates(sightings):
         if sighting.town == searchTown and sighting.mammal == searchMammal: # if these match
             print(sighting.date) # print the date and repeat loop
 
-# Count and display
+# Count and display sightings for each date in the file
 def numSightings(sightings):
-    pass
+    dayToCount = sightings[0].date # sets first date in file to the one to be counted
+    count = 1
+    for index in range(1, len(sightings)): # loops over the rest
+        if sightings[index].date == dayToCount: # if the date of the rest = the date currently counting
+            count = count + 1 # add to count and move to next entry
+        else:
+            print(dayToCount + " " + str(count)) # if its a diff date, print the previous date and final count
+            dayToCount = sightings[index].date # make the current date the new one to find
+            count = 1
+    
+    print(dayToCount + " " + str(count)) # after it has looped over the last one, print it 
 
 
-sightings = readData()
-print(sightings[0])
+sightings = readData() # created array called sightings to pass into the rest of the functions
+findOldest(sightings)
+displayDates(sightings)
+numSightings(sightings)
