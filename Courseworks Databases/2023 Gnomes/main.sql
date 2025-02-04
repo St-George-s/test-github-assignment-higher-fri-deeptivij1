@@ -1,5 +1,5 @@
 
--- 2b: Lists of gnomeNames and quantities with solar in description
+-- 2b: Lists gnomeNames and quantities with solar in description
 SELECT gnomeName, SUM(quantity) AS [Total gnomes sold]
 FROM Gnome G, GnomePurchase GP
 WHERE G.gnomeID = GP.gnomeID and G.description LIKE "%solar%"
@@ -18,7 +18,7 @@ WHERE G.unitPrice = (
 ) AND Quantity >= 3;
 
 -- 2d: Sum total orders and round to 2dp
-SELECT forename, surname, ROUND(SUM(quantity * unitPrice * 1.2), 2) AS [Total to Pay £]
+SELECT forename, surname, ROUND(SUM(quantity * unitPrice * 1.2), 2) AS [Total to Pay (£)]
 FROM Customer, Gnome, GnomePurchase, Orders
 WHERE Orders.orderID="ord0024"
 AND Customer.customerID=Orders.customerID
