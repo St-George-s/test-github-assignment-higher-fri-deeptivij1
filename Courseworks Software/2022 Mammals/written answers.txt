@@ -20,3 +20,18 @@ def convert_strings(inputted_word):
 PART B
 1c: code written on answers.py
 
+1d: 
+
+How watchpoint could be used to test these sightings are counted correctly
+A watchpoint for the variable count could be tracked and the code can stop when it reaches 6
+when dayToCount becomes 02/09/21
+
+1e:
+
+Evaluate efficiency of function that changed first character of input to upper-case
+- Efficient because it allows you to use the same function for mammal and town 
+- Efficient because the first letter is only changed if the first character is lowercase, otherwise it's returned immediately
+
+Evaluate maintainability of your program, referring to modularity
+- Maintainable because you can edit each sub-routine individually without impacting others 
+- Local variables can be edited within each sub-routine without it affecting the main program

@@ -67,7 +67,7 @@ def numSightings(sightings):
     
     print(dayToCount + " " + str(count)) # after it has looped over the last one, print it 
 
-
+# main
 sightings = readData() # created array called sightings to pass into the rest of the functions
 findOldest(sightings)
 displayDates(sightings)
