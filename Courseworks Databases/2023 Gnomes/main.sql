@@ -18,7 +18,7 @@ WHERE G.unitPrice = (
     FROM Gnome
 ) AND Quantity >= 3;
 
--- OR LIKE SQA DOES TWO QUERIES:
+-- OR LIKE SQA DOES TWO QUERIES BUT DOESN'T WORK IN THIS SOFTWARE
 SELECT max(unitPrice) AS [Expensive]
 FROM Gnome;
 

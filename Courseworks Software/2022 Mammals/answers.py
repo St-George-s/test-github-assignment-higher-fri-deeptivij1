@@ -57,7 +57,7 @@ def displayDates(sightings):
 def numSightings(sightings):
     dayToCount = sightings[0].date # sets first date in file to the one to be counted
     count = 1
-    for index in range(1, len(sightings)): # loops over the rest
+    for index in range(1, len(sightings)): # loops over the rest OR for sighting in sightings[1:]
         if sightings[index].date == dayToCount: # if the date of the rest = the date currently counting
             count = count + 1 # add to count and move to next entry
         else:
