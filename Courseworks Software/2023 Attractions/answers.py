@@ -5,7 +5,7 @@ import csv
 
 # Read data from file into parallel arrays
 def readFile():
-    with open("SoftwareCoursework23/attractions.csv" , "r") as file:
+    with open("Courseworks Software/2023 Attractions/attractions.csv" , "r") as file:
         attraction = []
         category = []
         visitors = []
@@ -54,7 +54,7 @@ def most_visited(attraction, visitors):
 
 # Writes roller coasters to service within 7 days to file
 def servicing(attraction, category, daysOpen):
-    with open('SoftwareCoursework23/service.csv', 'w') as file:
+    with open('Courseworks Software/2023 Attractions/service.csv', 'w') as file:
         writer = csv.writer(file)
         for index in range(len(attraction)):
             if category[index] == "Roller Coaster":
