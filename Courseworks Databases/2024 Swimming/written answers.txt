@@ -1,0 +1,19 @@
+Task 2: database design and development
+
+
+PART A
+2a: A query to calculate total days of hosting event for each city 
+    A query to update details of swimmers
+
+2b:
+(i) Swimmer --< Result >-- Race
+A swimmer's ID can be in many results but a result can contain one swimmer. 
+A race's ID can be in multiple results but a result can only have one race.
+
+(ii) Compound key: swimmerID and raceNumber (both of the two primary keys that link to Result table)
+
+PART B
+2c,d,e: code written on main.sql
+
+2f: What additional data (with reference to structure) would be required to show total number of days each city has hosted an event
+An extra field to the Event table with the number of days of each event so you can calculate total
