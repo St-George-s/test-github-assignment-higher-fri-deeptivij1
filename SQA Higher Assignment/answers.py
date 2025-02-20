@@ -12,7 +12,7 @@ class order:
         self.cost = cost
         self.rating = rating
 
-# Read data from file into an array of records
+# Read data from file into array of records
 def readData():
     orders = []
 
