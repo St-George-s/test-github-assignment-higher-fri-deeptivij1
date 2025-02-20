@@ -20,41 +20,50 @@ def readData():
         reader = csv.reader(file) # Reading from CSV
         for row in reader:
             # Creates an order object for each row of info + adds it to array of records
-            order_row = order(row[0], row[1], row[2], row[3], row[4], int(row[5])) 
+            order_row = order(row[0], row[1], row[2], row[3], row[4], int(row[5]))
             orders.append(order_row)
 
     return orders
 
-# Find position of winning customer
+# Find and return position of winning customer
 def findWinningPosition(orders):
     position = -1
     index = 0
     search_month = input("Enter the first three letters of the month to search: ")
     while position == -1 and index < len(orders): 
-        if search_month in orders[index].date and orders[index].rating == 5: #if current month matches search month AND rating is 5
-            position = index # set position of winner to current index
+        if search_month in orders[index].date and orders[index].rating == 5: # If current month matches search month AND rating is 5
+            position = index # Set winner position to current index
         index = index + 1
 
     return position
 
 # Write details of winning customer to text file
 def writeWinningCustomer(orders, position):
-    with open("SQA Higher Assignment/winningCustomer.txt", "w") as file:
-        if position >= 0:
-            file.write(orders[position].orderNum, orders[position].email, orders[position].cost)
+    with open("SQA Higher Assignment/winningCustomer.txt", "w") as file: 
+        if position >= 0: # If there is a winner (position > -1)
+            file.write(orders[position].orderNum + "," + orders[position].email + "," + orders[position].cost) # Write details to file
+        else:
+            file.write("No winner")
+    file.close()
 
+# Count and return total orders of given option (delivery/collection)
+def countOption(orders, searchOption):
+    count = 0 
+    for order in orders:
+        if order.option == searchOption: # If order option matches option to be counted
+            count = count + 1
+    return str(count)
 
-
-
-# example COMMENT WRITEWINNINGCUSTOMER FUNCTION
-        for order in orders:
-            if int(order.id) % 5 == 0:
-                file.write(order.id + "-" + order.product[:3] + "-DISCOUNT CODE ASSIGNED" + "\n")
-            else:
-                file.write(order.id + "-" + order.product[:3] + "-NO DISCOUNT" + "\n")
-
+# Display total number of orders delivered and collected
+def displayTotalOrders(orders):
+    delivered = countOption(orders, "Delivery") # Store returned count in variable
+    collected = countOption(orders, "Collection")
+    print("Total number of orders delivered to date: " + delivered)
+    print("Total number of orders collected to date: " + collected)
 
 
 # Main
-orders = readData() # orders array of records made
+orders = readData() # Array of records called orders made
 position = findWinningPosition(orders)
+writeWinningCustomer(orders, position)
+displayTotalOrders(orders)
