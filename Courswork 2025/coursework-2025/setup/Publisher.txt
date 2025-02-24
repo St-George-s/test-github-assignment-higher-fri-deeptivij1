@@ -1,0 +1,34 @@
+CREATE TABLE Publisher(
+publisherID int NOT NULL,
+publisherName varchar(30) NOT NULL,
+foundedYear int NOT NULL,
+headquarters varchar(10) NOT NULL
+);
+
+-- The following may be added to the CREATE statement
+-- Primary Key Syntax (added after field name and NOT NULL)
+--     PRIMARY KEY (fieldName)
+--          or for compound PK
+--     CONSTRAINT PK_compoundFieldName PRIMARY KEY (field1,field2)
+-- Foreign Key Syntax (added after field list)
+--     FOREIGN KEY (field name) REFERENCES tableName(fieldName)
+-- Boolean Field Type
+--     For some SQL environments 'bool' may have to be changed to 'int'
+-- Text Field Max Size
+--     Edit (255) to required length
+-- Validation of length of text (added after create statement as new statement
+--     CHECK (CHAR_LENGTH(fieldName) > value)
+-- Range Check (added after field list)
+--     CHECK (fieldName >= value)
+--     CHECK (fieldName >= value AND fieldName <= value2)
+-- Restricted choice
+--     CHECK(fieldName in ('value1','value2','value3')) 
+
+-- Note
+-- At N5 Check constraints (that are ignored by a MySQL server) 
+-- are being used instead of triggers.
+
+INSERT INTO Publisher VALUES(1,"Epic Doddles",1960,"America");
+INSERT INTO Publisher VALUES(2,"Kapow Publications",1962,"America");
+INSERT INTO Publisher VALUES(3,"Heroic Inklings",1967,"UK");
+INSERT INTO Publisher VALUES(4,"Panel Pals",1973,"Australia");
