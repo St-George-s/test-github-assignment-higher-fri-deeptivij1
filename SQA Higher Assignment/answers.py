@@ -52,14 +52,14 @@ def countOption(orders, searchOption):
     for order in orders:
         if order.option == searchOption: # If order option matches option to be counted
             count = count + 1
-    return str(count)
+    return count
 
 # Display total number of orders delivered and collected
 def displayTotalOrders(orders):
     delivered = countOption(orders, "Delivery") # Store returned count in variable
     collected = countOption(orders, "Collection")
-    print("Total number of orders delivered to date: " + delivered)
-    print("Total number of orders collected to date: " + collected)
+    print("Total number of orders delivered to date: " + str(delivered))
+    print("Total number of orders collected to date: " + str(collected))
 
 
 # Main
