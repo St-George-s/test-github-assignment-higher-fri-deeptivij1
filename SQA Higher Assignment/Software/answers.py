@@ -16,7 +16,7 @@ class order:
 def readData():
     orders = []
 
-    with open("SQA Higher Assignment/orders.txt", "r") as file:
+    with open("SQA Higher Assignment/Software/orders.txt", "r") as file:
         reader = csv.reader(file) # Reading from CSV
         for row in reader:
             # Creates an order object for each row of info + adds it to array of records
@@ -39,7 +39,7 @@ def findWinningPosition(orders):
 
 # Write details of winning customer to text file
 def writeWinningCustomer(orders, position):
-    with open("SQA Higher Assignment/winningCustomer.txt", "w") as file: 
+    with open("SQA Higher Assignment/Software/winningCustomer.txt", "w") as file: 
         if position >= 0: # If there is a winner (position > -1)
             file.write(orders[position].orderNum + "," + orders[position].email + "," + orders[position].cost) # Write details to file
         else:
