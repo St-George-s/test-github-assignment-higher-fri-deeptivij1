@@ -31,7 +31,8 @@ def findWinningPosition(orders):
     index = 0
     search_month = input("Enter the first three letters of the month to search: ")
     while position == -1 and index < len(orders): 
-        if search_month in orders[index].date and orders[index].rating == 5: # If current month matches search month AND rating is 5
+        # If current month matches search month AND rating is 5
+        if search_month in orders[index].date and orders[index].rating == 5: 
             position = index # Set winner position to current index
         index = index + 1
 
@@ -41,7 +42,8 @@ def findWinningPosition(orders):
 def writeWinningCustomer(orders, position):
     with open("Coursework 2025/Software/winningCustomer.txt", "w") as file: 
         if position >= 0: # If there is a winner (position > -1)
-            file.write(orders[position].orderNum + "," + orders[position].email + "," + orders[position].cost) # Write details to file
+            # Write details to file
+            file.write(orders[position].orderNum + "," + orders[position].email + "," + orders[position].cost) 
         else:
             file.write("No winner")
     file.close()
