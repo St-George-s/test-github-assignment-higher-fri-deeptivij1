@@ -22,3 +22,9 @@ class TaskList:
             return 
         print(f"Completed: {self.head.subject} - {self.head.description}")
         self.head = self.head.next
+
+    def count_tasks(self):
+        current = self.head
+        while current:
+            print(f"{current.subject}: {current.description} (Due {current.due_date})")
+            current = current.next
