@@ -1,18 +1,39 @@
 # Can be -, M, H or S
 import random
 
-random.randint(0,4)
-random.randint(0,1)
-
-
             #  1    2    3    4    5
-grid =      [["-", "-", "S", "S", "S"], 
+grid =      [["-", "-", "-", "-", "-"], 
             ["-", "-", "-", "-", "-"], 
             ["-", "-", "-", "-", "-"], 
             ["-", "-", "-", "-", "-"], 
             ["-", "-", "-", "-", "-"]]
-hits = 0
 
+# 0 = horizontal and 1 = vertical
+shipDirection = random.randint(0,1)
+if shipDirection == 0:
+    shipColumn = random.randint(0,2)
+    shipRow = random.randint(0,4)
+    grid[shipRow][shipColumn] = "S"
+    grid[shipRow][shipColumn + 1] = "S"
+    grid[shipRow][shipColumn + 2] = "S"
+
+if shipDirection == 1:
+    shipRow = random.randint(0,2)
+    shipColumn = random.randint(0,4)
+    grid[shipRow][shipColumn] = "S"
+    grid[shipRow + 1][shipColumn] = "S"
+    grid[shipRow + 2][shipColumn] = "S"
+
+print(grid)
+    
+    
+
+
+
+    
+
+
+hits = 0
 
 while hits < 3:
     guess = input("Enter row & column 1-5: ")
