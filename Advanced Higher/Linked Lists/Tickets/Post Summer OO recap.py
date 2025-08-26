@@ -18,9 +18,16 @@ class HelpDesk:
         while current is not None:
             print(f"{current.user} reported: {current.issue}")
             current = current.next
+
+    # Changes the head to the next one - most recent is removed
+    def resolve_ticket(self):
+        self.head = self.head.next
+
+    def 
 hd = HelpDesk()
 hd.log_ticket("deeptivij", "Wifi issues")
 hd.log_ticket("fayealw", "Keyboard isn't working")
 hd.log_ticket("v2957d", "Phone glitching")
+hd.resolve_ticket()
 hd.show_tickets()
 
