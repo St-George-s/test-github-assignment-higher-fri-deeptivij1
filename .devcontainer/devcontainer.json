@@ -1,10 +1,9 @@
 {
-    "name": "Python Dev Environment",
-    "image": "mcr.microsoft.com/devcontainers/python:3.11",
-    "extensions": [
-      "ms-python.python"
-    ],
-    "settings": {
-      "workbench.colorTheme": "Default Dark+"
-    }
-  }
+  "name": "Python + MariaDB (Codespaces)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+  "features": {},
+  "extensions": ["ms-python.python"],
+  "settings": { "workbench.colorTheme": "Default Dark+" },
+  "forwardPorts": [3306],
+  "postCreateCommand": "bash .devcontainer/init-db.sh"
+}
