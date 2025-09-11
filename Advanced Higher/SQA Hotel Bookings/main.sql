@@ -1,45 +1,48 @@
--- CREATE DATABASE TravelAgencyAugust;
+CREATE DATABASE IF NOT EXISTS project2;
+USE project2;
+
+CREATE DATABASE TravelAgencyAugust;
 
 
--- CREATE TABLE Resort (
--- 	resortID int NOT NULL PRIMARY KEY,
--- 	resortName varchar(20) NOT NULL,
--- 	resortType varchar(20) NOT NULL
--- );
+CREATE TABLE Resort (
+	resortID int NOT NULL PRIMARY KEY,
+	resortName varchar(20) NOT NULL,
+	resortType varchar(20) NOT NULL
+);
 
 
--- CREATE TABLE Hotel (
--- 	hotelRef varchar(4) NOT NULL PRIMARY KEY,
--- 	hotelName varchar(20) NOT NULL,
--- 	resortID int NOT NULL,
--- 	starRating int NOT NULL,
--- 	seasonStartDate date,
--- 	mealPlan varchar(17) NOT NULL,
--- 	checkInTime time NOT NULL,
--- 	pricePersonNight float(6,2) NOT NULL,
--- 	FOREIGN KEY (resortID) REFERENCES Resort(resortID)
--- );
+CREATE TABLE Hotel (
+	hotelRef varchar(4) NOT NULL PRIMARY KEY,
+	hotelName varchar(20) NOT NULL,
+	resortID int NOT NULL,
+	starRating int NOT NULL,
+	seasonStartDate date,
+	mealPlan varchar(17) NOT NULL,
+	checkInTime time NOT NULL,
+	pricePersonNight float(6,2) NOT NULL,
+	FOREIGN KEY (resortID) REFERENCES Resort(resortID)
+);
 
 
--- CREATE TABLE Customer (
--- 	customerNo int AUTO_INCREMENT PRIMARY KEY,
--- 	firstname varchar(20) NOT NULL,
--- 	surname varchar(20) NOT NULL,
--- 	address varchar(40) NOT NULL,
--- 	town varchar(20) NOT NULL,
--- 	postcode varchar(8) NOT NULL
--- );
+CREATE TABLE Customer (
+	customerNo int AUTO_INCREMENT PRIMARY KEY,
+	firstname varchar(20) NOT NULL,
+	surname varchar(20) NOT NULL,
+	address varchar(40) NOT NULL,
+	town varchar(20) NOT NULL,
+	postcode varchar(8) NOT NULL
+);
 
 
--- CREATE TABLE Booking (
--- 	hotelRef varchar(4) NOT NULL,
--- 	customerNo int NOT NULL,
--- 	startDate date NOT NULL,
--- 	numberNights int NOT NULL,
--- 	numberInParty int NOT NULL,
--- 	PRIMARY KEY (customerNo, hotelRef, startDate),
--- 	FOREIGN KEY (customerNo) REFERENCES Customer(customerNo),
--- 	FOREIGN KEY (hotelRef) REFERENCES Hotel(hotelRef)
+CREATE TABLE Booking (
+	hotelRef varchar(4) NOT NULL,
+	customerNo int NOT NULL,
+	startDate date NOT NULL,
+	numberNights int NOT NULL,
+	numberInParty int NOT NULL,
+	PRIMARY KEY (customerNo, hotelRef, startDate),
+	FOREIGN KEY (customerNo) REFERENCES Customer(customerNo),
+	FOREIGN KEY (hotelRef) REFERENCES Hotel(hotelRef)
 -- );
 
 
