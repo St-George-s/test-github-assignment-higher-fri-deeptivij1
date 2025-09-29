@@ -102,19 +102,55 @@ FROM Booking;
 -- FROM Class;
 
 -- 2. Calculate total spend for each member >= £120
-SELECT M.firstName, M.surname, SUM(C.pricePerPerson * B.numberOfSessions * B.numberInParty) AS 'Total spend'
-FROM Member M, Class C, Booking B
-WHERE M.memberNo = B.memberNo 
-AND C.classCode = B.classCode
-GROUP BY M.memberNo
-HAVING SUM(C.pricePerPerson * B.numberOfSessions * B.numberInParty) >= 120
-ORDER BY SUM(C.pricePerPerson * B.numberOfSessions * B.numberInParty) DESC;
+-- SELECT M.firstName, M.surname, SUM(C.pricePerPerson * B.numberOfSessions * B.numberInParty) AS 'Total spend'
+-- FROM Member M, Class C, Booking B
+-- WHERE M.memberNo = B.memberNo 
+-- AND C.classCode = B.classCode
+-- GROUP BY M.memberNo
+-- HAVING SUM(C.pricePerPerson * B.numberOfSessions * B.numberInParty) >= 120
+-- ORDER BY SUM(C.pricePerPerson * B.numberOfSessions * B.numberInParty) DESC;
 
 -- 3. Show average price per person above £9 for each centre
--- SELECT Ce.centreName, AVG(Cl.pricePerPerson)
+-- SELECT Ce.centreName, round(AVG(Cl.pricePerPerson), 2) AS 'Price per person'
 -- FROM Centre Ce, Class Cl
 -- WHERE Ce.centreID = Cl.centreID
 -- GROUP BY Ce.centreName
+-- HAVING AVG(Cl.pricePerPerson) > 9;
+
+
+-- 4. List classes at centres that are not type 'university'
+-- SELECT Cl.className, Ce.centreName
+-- FROM Class Cl, Centre Ce
+-- WHERE Cl.centreID = Ce.centreID 
+-- AND Ce.centreType != "university";
+
+-- 5. Show members that have between 2 and 4 bookings
+-- SELECT M.firstName, M.surname, COUNT(B.memberNo) AS 'No. of bookings'
+-- FROM Member M, Booking B
+-- WHERE M.memberNo = B.memberNo 
+-- GROUP BY M.memberNo
+-- HAVING COUNT(B.memberNo) BETWEEN 2 AND 4;
+
+-- 6. Surname, postcode and town of members whose towns are between E and M
+-- SELECT M.surname, M.postcode, M.town
+-- FROM Member M
+-- WHERE M.town BETWEEN 'E' AND 'M'
+-- ORDER BY M.town;
+
+-- 7. Class name and type where is in the list
+-- SELECT Cl.className, Cl.sessionType
+-- FROM Class Cl
+-- WHERE Cl.sessionType IN ("Drop-in", "Term", "Intensive");
+
+-- 8. Centre names whose type is not in list
+-- SELECT Ce.centreName, Ce.centreType
+-- FROM Centre Ce
+-- WHERE Ce.centreType not in ("community", "leisure");
+
+-- 9. Show the class with the highest price per person
+-- SELECT Cl.className, MAX(Cl.pricePerPerson)
+-- FROM Class Cl
+-- HAVING MAX(Cl.pricePerPerson);
 
 
 
