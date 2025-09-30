@@ -152,7 +152,48 @@ FROM Booking;
 -- FROM Class Cl
 -- HAVING MAX(Cl.pricePerPerson);
 
+-- 10. Show classes whose level is below the average level across all classes
+-- SELECT Cl.className, Cl.level
+-- FROM Class Cl
+-- HAVING Cl.level < AVG(Cl.level);
 
+-- 11. Show firstName, surname, postcode of Members who booked the same class as member 201, excluding member 201. 
+-- SELECT M.firstName, M.surname, M.postcode
+-- FROM Member M, Booking B
+-- WHERE M.memberNo = B.memberNo 
+-- AND M.memberNo != 201
+-- AND B.classCode IN (
+--     SELECT B.classCode
+--     FROM Booking B
+--     WHERE B.memberNo = 201
+-- );
 
+-- 12. List className and level for all classes booked by Member 233
+SELECT Cl.className, Cl.level
+FROM Class Cl, Booking B
+WHERE Cl.classCode = B.classCode
+AND B.memberNo = 233;
 
+-- 13. Show centre names where Member 233 has not made any booking
+SELECT Ce.centreName, Ce.centreType
+FROM Centre Ce, Booking B, Class Cl
+WHERE Ce.centreID = Cl.centreID
+AND B.classCode = Cl.classCode
+AND B.memberNo != 233;
+
+SELECT ce.centreName, ce.centreType 
+
+FROM Centre ce 
+
+WHERE ce.centreID NOT IN ( 
+
+  SELECT c.centreID 
+
+  FROM Class c 
+
+  JOIN Booking b ON c.classCode = b.classCode 
+
+  WHERE b.memberNo = 233 
+
+); 
 
