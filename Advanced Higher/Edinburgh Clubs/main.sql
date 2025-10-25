@@ -169,31 +169,96 @@ FROM Booking;
 -- );
 
 -- 12. List className and level for all classes booked by Member 233
-SELECT Cl.className, Cl.level
-FROM Class Cl, Booking B
-WHERE Cl.classCode = B.classCode
-AND B.memberNo = 233;
+-- SELECT Cl.className, Cl.level
+-- FROM Class Cl, Booking B
+-- WHERE Cl.classCode = B.classCode
+-- AND B.memberNo = 233;
 
 -- 13. Show centre names where Member 233 has not made any booking
-SELECT Ce.centreName, Ce.centreType
-FROM Centre Ce, Booking B, Class Cl
-WHERE Ce.centreID = Cl.centreID
-AND B.classCode = Cl.classCode
-AND B.memberNo != 233;
+-- SELECT Ce.centreName, Ce.centreType
+-- FROM Centre Ce
+-- WHERE Ce.centreID NOT IN (
+--   SELECT C.centreID
+--   FROM Class C, Booking B
+--   WHERE C.classCode = B.classCode
+--   AND B.memberNo = 233
+-- );
 
-SELECT ce.centreName, ce.centreType 
+-- -- 14. List bookings whose cost is greater than any booking made by members with surnames in ("Lowden", "McKay", "Gordon")
+-- SELECT B.memberNo, B.classCode, (B.numberOfSessions * C.pricePerPerson * B.numberInParty) AS 'Booking cost'
+-- FROM Booking B, Class C
+-- WHERE B.classCode = C.classCode
+-- AND (B.numberOfSessions * C.pricePerPerson * B.numberInParty) > ANY (
 
-FROM Centre ce 
+--   SELECT (B.numberOfSessions * C.pricePerPerson * B.numberInParty)
+--   FROM Booking B, Class C, Member M
+--   WHERE B.classCode = C.classCode
+--   AND M.memberNo = B.memberNo
+--   AND M.surname IN ("Lowden", "McKay", "Gordon")
 
-WHERE ce.centreID NOT IN ( 
+-- );
 
-  SELECT c.centreID 
+-- 15. Level-5 classes with at least one booking, ordered by sessionType A→Z
+-- SELECT Cl.classCode, Cl.sessionType, Cl.level
+-- FROM Class Cl, Booking B
+-- WHERE Cl.classCode = B.classCode
+-- AND Cl.level = 5
+-- AND EXISTS (
 
-  FROM Class c 
+--   SELECT *
+--   FROM Booking B, Class Cl
+--   WHERE B.classCode = Cl.classCode
 
-  JOIN Booking b ON c.classCode = b.classCode 
+-- )
+-- ORDER BY Cl.sessionType ASC;
 
-  WHERE b.memberNo = 233 
+-- 16. Show members that have never made a booking
+-- SELECT M.memberNo, M.firstName, M.surname, M.address
+-- FROM Member M
+-- WHERE NOT EXISTS (
 
-); 
+--   SELECT *
+--   FROM Booking B 
+--   --(don't need MEMBER here??)--
+--   WHERE B.memberNo = M.memberNo
+
+-- );
+
+-- 17. numberOfSessions × numberInParty for each class. Show classes where this > total for Member 218, and the class level < maximum level in the system. 
+-- Order by level. Coalesce 
+
+
+
+-- SELECT Cl.className, Cl.level, SUM(B.numberOfSessions*B.numberInParty) AS 'Sessions x Party Sizes'
+-- FROM Booking B, Class Cl
+-- WHERE B.classCode = Cl.classCode
+-- GROUP BY Cl.classCode, Cl.className, Cl.level
+-- HAVING SUM(B.numberOfSessions*B.numberInParty) > (
+  
+--   SELECT COALESCE(SUM(B.numberOfSessions*B.numberInParty), 0) 
+--   FROM Booking B
+--   WHERE B.memberNo = 218
+
+-- )
+-- AND Cl.level < (
+  
+--   SELECT MAX(Cl.level)
+--   FROM Class Cl
+-- )
+-- ORDER BY Cl.level ASC;
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
 

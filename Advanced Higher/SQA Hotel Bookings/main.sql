@@ -65,15 +65,15 @@
 -- INSERT INTO Customer VALUES (428, "Max", "Lowden", "5 Admiral Way", "Gourock", "PA19 1UX");
 -- INSERT INTO Customer VALUES (457, "Pauline", "Sheriffhall", "34a Newton Road", "Dalkeith", "EH22 1FD");
 
-INSERT INTO Booking VALUES ("FW02", 315, "2019-04-26", 2, 3);
-INSERT INTO Booking VALUES ("AY72", 426, "2019-04-30", 7, 6);
-INSERT INTO Booking VALUES ("AY19", 426, "2019-05-05", 7, 2);
-INSERT INTO Booking VALUES ("PR04", 290, "2019-05-05", 2, 1);
-INSERT INTO Booking VALUES ("PR04", 315, "2019-06-01", 3, 2);
-INSERT INTO Booking VALUES ("AY72", 111, "2019-06-01", 5, 4);
-INSERT INTO Booking VALUES ("PR04", 290, "2019-07-07", 7, 5);
-INSERT INTO Booking VALUES ("GL31", 290, "2019-07-12", 1, 1);
-INSERT INTO Booking VALUES ("AY19", 315, "2019-07-12", 4, 4);
+-- INSERT INTO Booking VALUES ("FW02", 315, "2019-04-26", 2, 3);
+-- INSERT INTO Booking VALUES ("AY72", 426, "2019-04-30", 7, 6);
+-- INSERT INTO Booking VALUES ("AY19", 426, "2019-05-05", 7, 2);
+-- INSERT INTO Booking VALUES ("PR04", 290, "2019-05-05", 2, 1);
+-- INSERT INTO Booking VALUES ("PR04", 315, "2019-06-01", 3, 2);
+-- INSERT INTO Booking VALUES ("AY72", 111, "2019-06-01", 5, 4);
+-- INSERT INTO Booking VALUES ("PR04", 290, "2019-07-07", 7, 5);
+-- INSERT INTO Booking VALUES ("GL31", 290, "2019-07-12", 1, 1);
+-- INSERT INTO Booking VALUES ("AY19", 315, "2019-07-12", 4, 4);
 
 
 -- -- Query 1

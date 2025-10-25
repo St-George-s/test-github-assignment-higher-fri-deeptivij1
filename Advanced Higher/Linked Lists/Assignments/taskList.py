@@ -23,11 +23,11 @@ class TaskList:
         print(f"Completed: {self.head.subject} - {self.head.description}")
         self.head = self.head.next
 
-def count_tasks(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count += 1
-            current = current.next
-        print(f"There are {count} tasks")
+    def count_tasks(self):
+            current = self.head
+            count = 0
+            while current is not None:
+                count += 1
+                current = current.next
+            print(f"There are {count} tasks")
 
