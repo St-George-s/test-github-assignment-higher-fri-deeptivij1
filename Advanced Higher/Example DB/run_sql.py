@@ -1,7 +1,7 @@
 import mysql.connector
 from pathlib import Path
 
-SQL_FILE = Path(__file__).with_name("main.sql")
+SQL_FILE = Path(__file__).with_name("init.sql")
 
 def split_statements(text: str):
     parts = [p.strip() for p in text.split(';')]
