@@ -2,7 +2,7 @@ from qiskit import QuantumCircuit
 import matplotlib.pyplot as plt
 
 # -----------------------------
-# 1. Create a simple Deutsch–Jozsa circuit using balanced function
+# 1. Create a simple Deutsch circuit using balanced function
 # -----------------------------
 qc = QuantumCircuit(2, 1)
 
@@ -26,5 +26,5 @@ qc.measure(0, 0)
 # 2. Draw circuit
 # -----------------------------
 qc.draw(output='mpl')  # Matplotlib visual
-plt.savefig("dj_circuit.png")  # Save for viewing in Codespaces
-print("Circuit diagram saved as dj_circuit.png")
+plt.savefig("balanced_circuit.png")  # Save for viewing in Codespaces
+print("Circuit diagram saved as balanced_circuit.png")

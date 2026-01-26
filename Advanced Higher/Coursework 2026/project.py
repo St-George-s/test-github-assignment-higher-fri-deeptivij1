@@ -2,6 +2,7 @@ import mysql.connector
 from dataclasses import dataclass
 from typing import List, Optional
 
+
 # -------------------------------
 # Database configuration
 # -------------------------------
@@ -29,6 +30,7 @@ def close_db(conn, cur):
 # Menu + input validation
 # -------------------------------
 def signIn():
+    pass
 
 def displayMenu():
     print("\n -- Appointment System Menu --")
@@ -39,13 +41,27 @@ def displayMenu():
 
 def validateDOB():
     inputDOB = input("Enter your date of birth (YYYY-MM-DD):")
-    while inputDOB < 2025-12-5:
-        inputDOB = input("Enter your date of birth (YYYY-MM-DD):")
-        print("Invalid date of birth.")
-    return inputDOB
+    year = int(inputDOB[:4])
+    month = int(inputDOB[5:7])
+    day = int(inputDOB[8:10])
+    isMonthValid =  not (1 <= month <= 12)
 
 
-validateDOB()
+    while isMonthValid and 
+        
+
+    # while int() > 2025 or (int(inputDOB[:3]) and int(inputDOB[5:6]) == 12 and int(inputDOB)[8:9] > 5):
+    #     inputDOB = input("Enter your date of birth (YYYY-MM-DD):")
+    #     print("Invalid date of birth.")
+    # return inputDOB
+
+def validateApptDate():
+    inputDate = int(input("Enter the desired appointment date (YYYY-MM-DD):"))
+    #while inputDate < 2025-12-
+
+date = validateDOB()
+print(date)
+
 
 
 
