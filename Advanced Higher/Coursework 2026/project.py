@@ -82,19 +82,17 @@ def validateApptDate():
         day = int(inputDate[8:10])
 
         # Checks between 01/12/2025 - 05/12/2025
-        if not (1<= day <= 5) and month != 12 and year != 2025:
+        if not ((1<= day <= 5) and month == 12 and year == 2025):
             print("Date not in range.")
             continue
+        else:
+            valid = True
 
-        # Month check
-        if not (1<= month <= 12):
-            print("Invalid month. Try again.")
-            continue
+    return inputDate
 
 
-date = validateDOB()
-print(date)
-
+inputDOB = validateDOB()
+inputDate = validateApptDate()
 
 
 
