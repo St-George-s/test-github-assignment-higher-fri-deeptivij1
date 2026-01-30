@@ -270,5 +270,5 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
 
 -- FR14: Select and display all info about doctors in the clinic
-SELECT d.fullName AS [Doctor], d.speciality, d.roomNo,
-FROM Doctor D;
+SELECT *
+FROM Patient;
