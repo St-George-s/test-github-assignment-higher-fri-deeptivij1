@@ -39,6 +39,7 @@ def displayMenu():
     print("3. View booked appointments")
     print("4. Find most available doctors")
 
+
 def validateDOB():
     valid = False
     while valid == False:
@@ -63,15 +64,16 @@ def validateDOB():
 
         elif year == 2025:
             if month == 12 and day >= 5:
-                print("Invalid. DOB must be before 05/12/2025.")
+                print("Invalid. DOB must be before 2025-12-05.")
                 continue
+            else:
+                valid = True
         elif year > 2025:
-            print("Invalid. DOB must be before 05/12/2025.")
+            print("Invalid. DOB must be before 2025-12-05.")
             continue
         else:
             valid = True
     return inputDOB
-  
 
 def validateApptDate():
     valid = False
@@ -83,16 +85,17 @@ def validateApptDate():
 
         # Checks between 01/12/2025 - 05/12/2025
         if not ((1<= day <= 5) and month == 12 and year == 2025):
-            print("Date not in range.")
+            print("Invalid. Date not in range.")
             continue
         else:
             valid = True
 
     return inputDate
 
-
 inputDOB = validateDOB()
+print(inputDOB)
 inputDate = validateApptDate()
+print(inputDate)
 
 
 
