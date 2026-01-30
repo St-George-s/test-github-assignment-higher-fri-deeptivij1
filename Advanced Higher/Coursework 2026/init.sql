@@ -3,7 +3,7 @@ DROP DATABASE project1;
 CREATE DATABASE IF NOT EXISTS project1;
 USE project1;
 
--- -- CREATE statements
+-- CREATE statements
 CREATE TABLE IF NOT EXISTS Doctor(
   doctorID INT PRIMARY KEY AUTO_INCREMENT,
   fullName VARCHAR(50) NOT NULL,
@@ -268,3 +268,7 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (5,'2025-12-05 16:00:00','2025-12-05 16:30:00',True),
 (17,'2025-12-05 16:30:00','2025-12-05 17:00:00',True),
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
+
+-- FR14: Select and display all info about doctors in the clinic
+SELECT d.fullName AS [Doctor], d.speciality, d.roomNo,
+FROM Doctor D;
