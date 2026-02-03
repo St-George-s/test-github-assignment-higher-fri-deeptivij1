@@ -3,6 +3,7 @@ DROP DATABASE project1;
 CREATE DATABASE IF NOT EXISTS project1;
 USE project1;
 
+-- FR1: Create and insert initial values into database
 -- CREATE statements
 CREATE TABLE IF NOT EXISTS Doctor(
   doctorID INT PRIMARY KEY AUTO_INCREMENT,
@@ -273,15 +274,17 @@ SELECT *
 FROM Doctor;
 
 -- FR14: Select and display all info about doctors in the clinic
--- SELECT d.fullName AS [Doctor], d.speciality, d.roomNo
--- FROM Doctor D;
+SELECT d.fullName AS 'Doctor', d.speciality, d.roomNo
+FROM Doctor d;
 
--- -- FR4: Displays doctors with less than 5 booked appointments
--- SELECT d.doctorID, d.fullName AS [Doctor], d.speciality, COUNT(a.apptID) AS [No. of appointments]
--- FROM Doctor D, Appointment A, Slot S
--- WHERE d.doctorID = s.doctorID, s.slotID = a.slotID
--- GROUP BY d.doctorID
--- HAVING COUNT(a.apptID) < 5
--- SORT BY COUNT(a.apptID) ASC;
+-- FR4: Displays doctors with less than 5 booked appointments
+SELECT d.doctorID, d.fullName AS [Doctor], d.speciality, COUNT(a.apptID) AS [No. of appointments]
+FROM Doctor D, Appointment A, Slot S
+WHERE d.doctorID = s.doctorID, s.slotID = a.slotID
+GROUP BY d.doctorID
+HAVING COUNT(a.apptID) < 5
+SORT BY COUNT(a.apptID) ASC;
+
+
 
 

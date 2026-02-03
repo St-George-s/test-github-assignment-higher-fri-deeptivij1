@@ -39,7 +39,7 @@ def displayMenu():
     print("3. View booked appointments")
     print("4. Find most available doctors")
 
-
+# FR9 - Get and validate that DOB is in the past < 05-12-2025
 def validateDOB():
     valid = False
     while valid == False:
@@ -75,6 +75,7 @@ def validateDOB():
             valid = True
     return inputDOB
 
+# FR10 - Get and validate that the desired appointment date is in range
 def validateApptDate():
     valid = False
     while valid == False:
@@ -96,7 +97,4 @@ inputDOB = validateDOB()
 print(inputDOB)
 inputDate = validateApptDate()
 print(inputDate)
-
-
-
 
