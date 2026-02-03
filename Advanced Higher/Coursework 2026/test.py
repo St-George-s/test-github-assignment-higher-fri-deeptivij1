@@ -34,16 +34,18 @@ WHERE fullName LIKE %s OR
 """, (myVar,myVarTwo))
 # need comma even for just 1
 
+# rewrite?
+def format():
+  cols = [d[0] for d in cur.description]
+  print(" | ".join(cols))
+  for row in cur.fetchall():
+    print(" | ".join(str(x) for x in row))
 
-cols = [d[0] for d in cur.description]
-print(" | ".join(cols))
-for row in cur.fetchall():
-  print(" | ".join(str(x) for x in row))
+format()
 
 # (4) CLOSE
 cur.close()
 conn.close()
-
 
 
 

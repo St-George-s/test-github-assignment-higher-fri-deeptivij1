@@ -17,20 +17,18 @@ DB_CONFIG = {
 # -------------------------------
 # Database helpers
 # -------------------------------
-def open_db():
-    conn = mysql.connector.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    return conn, cur
+#def open_db():
+conn = mysql.connector.connect(**DB_CONFIG)
+cur = conn.cursor()
+    #return conn, cur
 
-def close_db(conn, cur):
-    cur.close()
-    conn.close()
+# def close_db(conn, cur):
+#     cur.close()
+#     conn.close()
 
 # -------------------------------
-# Menu + input validation
+# Menu
 # -------------------------------
-def signIn():
-    pass
 
 def displayMenu():
     print("\n -- Appointment System Menu --")
@@ -39,6 +37,12 @@ def displayMenu():
     print("3. View booked appointments")
     print("4. Find most available doctors")
 
+def formatSQL():
+    cols = [d[0] for d in cur.description]
+    print(" | ".join(cols))
+    for row in cur.fetchall():
+        print(" | ".join(str(x) for x in row))
+    
 # FR9 - Get and validate that DOB is in the past < 05-12-2025
 def validateDOB():
     valid = False
@@ -93,8 +97,44 @@ def validateApptDate():
 
     return inputDate
 
-inputDOB = validateDOB()
-print(inputDOB)
-inputDate = validateApptDate()
-print(inputDate)
+# FR11 - Sign in: find and store the patientID in a variable
+def signIn():
+    inputName = input("Enter your full name: ")
+    inputDOB = validateDOB()
+    cur.execute("""
+    SELECT p.patientID
+    FROM Patient p
+    WHERE p.fullName = %s
+    AND p.dob = %s;
+    """, (inputName,inputDOB))
+    formatSQL()
+    # then store in a variable and return currentUserID to main program
+
+# FR14 - Select and display all info about doctors in the clinic
+def displayallDoctors():
+    cur.execute("""
+    SELECT d.fullName AS 'Doctor', d.speciality, d.roomNo
+    FROM Doctor d;
+    """)
+    formatSQL()
+
+# FR4: Displays doctors with less than 5 booked appointments
+def displayMostAvailableDoctors():
+    cur.execute("""
+    SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(a.apptID) AS 'No. of appointments'
+    FROM Doctor d, Appointment a, Slot s
+    WHERE d.doctorID = s.doctorID
+    AND s.slotID = a.slotID
+    GROUP BY d.doctorID
+    HAVING COUNT(a.apptID) < 5
+    ORDER BY COUNT(a.apptID) ASC;
+    """)
+    formatSQL()
+    
+
+# inputDate = validateApptDate()
+# print(inputDate)
+signIn()
+displayallDoctors()
+displayMostAvailableDoctors()
 

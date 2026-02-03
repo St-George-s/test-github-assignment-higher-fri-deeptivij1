@@ -1,3 +1,5 @@
+# EXAMPLE CODE FOR USING SQL QUERYING SAME DATABASE 'PROJECT1' ON PYTHON
+
 import mysql.connector
 
 # (1) OPEN
@@ -29,3 +31,21 @@ for row in cur.fetchall():
 # (4) CLOSE
 cur.close()
 conn.close()
+
+# example on table I made
+cur.execute("""
+SELECT d.fullName, d.speciality, d.roomNo
+FROM Doctor d
+WHERE fullName LIKE "Dr. Nadia Al-Sayed";
+ """)
+
+myVar = "Dr. Nadia Al-Sayed"
+myVarTwo = "Dr. Julia Roberts"
+
+cur.execute("""
+SELECT d.fullName, d.speciality, d.roomNo
+FROM Doctor d
+WHERE fullName LIKE %s OR
+      fullName LIKE %s;
+""", (myVar,myVarTwo))
+# need comma even for just 1 var
