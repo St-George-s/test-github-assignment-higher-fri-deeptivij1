@@ -1,0 +1,35 @@
+Task 1: software design and development
+
+~ ask if it's only the arrays data to be passed no files?
+
+PART A 
+1a:
+- Find names of attractions with the lowest number of visitors 
+- Find names of attractions with the highest number of visitors
+- Read attraction data into parallel arrays from CSV file
+- Identify all roller coasters to be serviced in next 7 days
+
+1b: 
+
+Read data from file into parallel arrays
+IN: 
+OUT: attraction(), category(), visitors(), daysOpen(), height()
+
+Find and displays names of least + most visited attractions
+IN: attraction(), visitors()
+OUT: 
+
+Write to file roller coasters to service within 7 days
+IN: attraction(), category(), daysOpen()
+OUT: 
+
+PART B (in answers.py)
+
+1c(i) - ASK HOW TO WRITE TO CSV, ONENOTE METHOD SEPARATED EACH LETTER WITH ',' 
+        writing with writer function needs an array so convert it with []
+1c(ii)
+
+1d: 
+1st iteration - True - 65 - False
+2nd iteration - False
+3rd iteration - True - 83 - True
