@@ -108,10 +108,10 @@ def signIn():
     AND p.dob = %s;
     """, (inputName,inputDOB))
     formatSQL()
-    # then store in a variable and return currentUserID to main program
+    # how to store in a variable and return currentUserID to main program
 
 # FR14 - Select and display all info about doctors in the clinic
-def displayallDoctors():
+def displayAllDoctors():
     cur.execute("""
     SELECT d.fullName AS 'Doctor', d.speciality, d.roomNo
     FROM Doctor d;
@@ -130,11 +130,22 @@ def displayMostAvailableDoctors():
     ORDER BY COUNT(a.apptID) ASC;
     """)
     formatSQL()
-    
+
+# FR3 - Displays all the user's booked appointments
+def displayBookedAppts(currentUserID):
+    cur.execute("""
+    SELECT a.apptID, s.startTime, s.endTime, d.fullName AS 'Doctor', d.roomNo, d.speciality, a.note
+    FROM Slot s, Doctor d, Appointment a
+    WHERE s.slotID = a.slotID
+    AND d.doctorID = s.doctorID
+    AND a.patientID = %s
+    ORDER BY s.startTime ASC;
+    """, (currentUserID))
+    formatSQL()
 
 # inputDate = validateApptDate()
 # print(inputDate)
-signIn()
-displayallDoctors()
-displayMostAvailableDoctors()
-
+# signIn()
+# displayAllDoctors()
+# displayMostAvailableDoctors()
+displayBookedAppts(1)
