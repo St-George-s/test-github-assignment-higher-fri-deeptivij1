@@ -270,11 +270,7 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (17,'2025-12-05 16:30:00','2025-12-05 17:00:00',True),
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
 
-
-INSERT INTO Appointment(slotID, patientID, note) VALUES
-(1, 5, "Hello");
-
-DELETE *
+SELECT *
 FROM Appointment;
 
 -- -- FR14: Select and display all info about doctors in the clinic

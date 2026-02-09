@@ -145,7 +145,8 @@ def displayBookedAppts(currentUserID):
 
 # inputDate = validateApptDate()
 # print(inputDate)
-# signIn()
+# currentUserID = signIn()
 # displayAllDoctors()
 # displayMostAvailableDoctors()
-displayBookedAppts(1)
+#displayBookedAppts(currentUserID)
+displayAllDoctors()
