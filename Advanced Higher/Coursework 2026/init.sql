@@ -270,21 +270,12 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (17,'2025-12-05 16:30:00','2025-12-05 17:00:00',True),
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
 
+
+INSERT INTO Appointment(slotID, patientID, note) VALUES
+(1, 1, "Hey");
+
 SELECT *
 FROM Appointment;
-
--- -- FR14: Select and display all info about doctors in the clinic
--- SELECT d.fullName AS 'Doctor', d.speciality, d.roomNo
--- FROM Doctor d;
-
--- -- FR4: Displays doctors with less than 5 booked appointments
--- SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(a.apptID) AS 'No. of appointments'
--- FROM Doctor D, Appointment A, Slot S
--- WHERE d.doctorID = s.doctorID AND s.slotID = a.slotID
--- GROUP BY d.doctorID
--- HAVING COUNT(a.apptID) < 5
--- SORT BY COUNT(a.apptID) ASC;
-
 
 
 

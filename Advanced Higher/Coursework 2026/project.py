@@ -107,8 +107,8 @@ def signIn():
     WHERE p.fullName = %s
     AND p.dob = %s;
     """, (inputName,inputDOB))
-    formatSQL()
-    # how to store in a variable and return currentUserID to main program
+    currentUserID = int(cur.fetchall()[0][0])
+    return currentUserID
 
 # FR14 - Select and display all info about doctors in the clinic
 def displayAllDoctors():
@@ -131,22 +131,39 @@ def displayMostAvailableDoctors():
     """)
     formatSQL()
 
-# FR3 - Displays all the user's booked appointments
+# FR3 - Display all the user's booked appointments
 def displayBookedAppts(currentUserID):
     cur.execute("""
     SELECT a.apptID, s.startTime, s.endTime, d.fullName AS 'Doctor', d.roomNo, d.speciality, a.note
     FROM Slot s, Doctor d, Appointment a
     WHERE s.slotID = a.slotID
     AND d.doctorID = s.doctorID
-    AND a.patientID = %s
+    AND a.patientID = '%s'
     ORDER BY s.startTime ASC;
     """, (currentUserID))
     formatSQL()
 
-# inputDate = validateApptDate()
-# print(inputDate)
-# currentUserID = signIn()
+# FR12 - Update availability of slot when it is chosen for booking
+def updateAvailability(chosenSlotID):
+    cur.execute("""
+    UPDATE Slot s
+    SET s.isAvailable = False
+    WHERE s.slotID = %s;
+    """, (chosenSlotID))
+
+#  FR13 - Insert row into Appointment table after slot is chosen, including optional note
+def addAppointment(currentUserID, chosenSlotID):
+    inputNote = input("Add optional note: ")
+    cur.execute("""
+    INSERT INTO Appointment a
+    VALUES (%s, %s, %s);
+    """, (chosenSlotID, currentUserID, inputNote))
+
+
+currentUserID = signIn()
+displayBookedAppts(currentUserID)
 # displayAllDoctors()
 # displayMostAvailableDoctors()
-#displayBookedAppts(currentUserID)
-displayAllDoctors()
+
+# displayAllDoctors()
+

@@ -23,10 +23,15 @@ FROM pupils p
 LEFT JOIN attendance a ON a.pupil_id = p.id
 ORDER BY p.id
 """)
+# formatting code
 cols = [d[0] for d in cur.description]
 print(" | ".join(cols))
 for row in cur.fetchall():
   print(" | ".join(str(x) for x in row))
+
+# stores fields in cur.description and values in fetchall in a tuple
+row_zero = cur.fetchall()[0]
+col_zero = row_zero[0]
 
 # (4) CLOSE
 cur.close()
