@@ -99,15 +99,26 @@ def validateApptDate():
 
 # FR11 - Sign in: find and store the patientID in a variable
 def signIn():
-    inputName = input("Enter your full name: ")
-    inputDOB = validateDOB()
-    cur.execute("""
-    SELECT p.patientID
-    FROM Patient p
-    WHERE p.fullName = %s
-    AND p.dob = %s;
-    """, (inputName,inputDOB))
-    currentUserID = int(cur.fetchall()[0][0])
+    signedIn = False
+    while signedIn == False:
+        inputName = input("Enter your full name: ")
+        inputDOB = validateDOB()
+        cur.execute("""
+        SELECT p.patientID
+        FROM Patient p
+        WHERE p.fullName = %s
+        AND p.dob = %s;
+        """, (inputName,inputDOB))
+        # If no patientID found
+        if cur.fetchall() == []:
+            print("User not found. Please try again.")
+            continue
+        else: 
+            currentUserID = cur.fetchall()[0][0]
+            if (1 <= currentUserID <= 60):
+                signedIn = True
+                print("Signed in!")
+
     return currentUserID
 
 # FR14 - Select and display all info about doctors in the clinic
@@ -121,13 +132,18 @@ def displayAllDoctors():
 # FR4: Displays doctors with less than 5 booked appointments
 def displayMostAvailableDoctors():
     cur.execute("""
-    SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(a.apptID) AS 'No. of appointments'
-    FROM Doctor d, Appointment a, Slot s
+    SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(s.isAvailable)
+    FROM Doctor d, Slot s
     WHERE d.doctorID = s.doctorID
-    AND s.slotID = a.slotID
-    GROUP BY d.doctorID
-    HAVING COUNT(a.apptID) < 5
-    ORDER BY COUNT(a.apptID) ASC;
+    AND s.isAvailable = 0
+    HAVING COUNT(s.isAvailable) < 5;
+    """)
+    formatSQL()
+
+def leastBusy():
+    cur.execute("""
+    SELECT *
+    FROM Slot;
     """)
     formatSQL()
 
@@ -136,11 +152,11 @@ def displayBookedAppts(currentUserID):
     cur.execute("""
     SELECT a.apptID, s.startTime, s.endTime, d.fullName AS 'Doctor', d.roomNo, d.speciality, a.note
     FROM Slot s, Doctor d, Appointment a
-    WHERE s.slotID = a.slotID
-    AND d.doctorID = s.doctorID
+    WHERE a.slotID = s.slotID
+    AND s.doctorID = d.doctorID
     AND a.patientID = '%s'
     ORDER BY s.startTime ASC;
-    """, (currentUserID))
+    """, (currentUserID,))
     formatSQL()
 
 # FR12 - Update availability of slot when it is chosen for booking
@@ -149,7 +165,7 @@ def updateAvailability(chosenSlotID):
     UPDATE Slot s
     SET s.isAvailable = False
     WHERE s.slotID = %s;
-    """, (chosenSlotID))
+    """, (chosenSlotID,))
 
 #  FR13 - Insert row into Appointment table after slot is chosen, including optional note
 def addAppointment(currentUserID, chosenSlotID):
@@ -160,10 +176,13 @@ def addAppointment(currentUserID, chosenSlotID):
     """, (chosenSlotID, currentUserID, inputNote))
 
 
-currentUserID = signIn()
-displayBookedAppts(currentUserID)
-# displayAllDoctors()
-# displayMostAvailableDoctors()
 
+# currentUserID = signIn()
+# print(currentUserID)
+#displayBookedAppts(currentUserID)
 # displayAllDoctors()
+
+updateAvailability(1)
+leastBusy()
+displayMostAvailableDoctors()
 

@@ -272,7 +272,7 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 
 
 INSERT INTO Appointment(slotID, patientID, note) VALUES
-(1, 1, "Hey");
+(1, 1, "Hello");
 
 SELECT *
 FROM Appointment;
