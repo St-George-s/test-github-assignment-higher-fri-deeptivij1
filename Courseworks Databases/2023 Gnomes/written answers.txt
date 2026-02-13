@@ -1,0 +1,13 @@
+Task 2: database design and development
+
+
+PART A 
+2a: A query to calculate total cost of each order
+    A query to update customer information
+    A query to search for customers to contact about special offers
+
+PART B
+2b,c,d: code written on main.sql
+2e:
+(i) The unit price may have changed compared to then
+(ii) Add a column for total cost of order when it was made

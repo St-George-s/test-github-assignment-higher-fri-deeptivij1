@@ -1,0 +1,56 @@
+# EXAMPLE CODE FOR USING SQL QUERYING SAME DATABASE 'PROJECT1' ON PYTHON
+
+import mysql.connector
+
+# (1) OPEN
+conn = mysql.connector.connect(
+    host="127.0.0.1",
+    user="student",
+    password="studentpw",
+    database="project1",
+    port=3306
+)
+cur = conn.cursor()
+
+# (2) EXECUTE (DML)
+cur.execute("INSERT INTO pupils(name, age) VALUES (%s, %s)", ("Grace Hopper", 19))
+conn.commit()
+
+# (3) DISPLAY (SELECT + basic formatting)
+cur.execute("""
+SELECT p.id, p.name, p.age, COALESCE(a.present, 0) AS present
+FROM pupils p
+LEFT JOIN attendance a ON a.pupil_id = p.id
+ORDER BY p.id
+""")
+# formatting code
+cols = [d[0] for d in cur.description]
+print(" | ".join(cols))
+for row in cur.fetchall():
+  print(" | ".join(str(x) for x in row))
+
+# stores fields in cur.description and values in fetchall in a tuple
+row_zero = cur.fetchall()[0]
+col_zero = row_zero[0]
+
+# (4) CLOSE
+cur.close()
+conn.close()
+
+# example on table I made
+cur.execute("""
+SELECT d.fullName, d.speciality, d.roomNo
+FROM Doctor d
+WHERE fullName LIKE "Dr. Nadia Al-Sayed";
+ """)
+
+myVar = "Dr. Nadia Al-Sayed"
+myVarTwo = "Dr. Julia Roberts"
+
+cur.execute("""
+SELECT d.fullName, d.speciality, d.roomNo
+FROM Doctor d
+WHERE fullName LIKE %s OR
+      fullName LIKE %s;
+""", (myVar,myVarTwo))
+# need comma even for just 1 var
