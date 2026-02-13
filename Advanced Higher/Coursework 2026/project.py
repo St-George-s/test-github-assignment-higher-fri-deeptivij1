@@ -42,7 +42,29 @@ def formatSQL():
     print(" | ".join(cols))
     for row in cur.fetchall():
         print(" | ".join(str(x) for x in row))
-    
+
+# FR2 - Display all available slots which don't coincide
+#       with user's previously booked appointments
+def displayNonConflictingSlots():
+    inputSpeciality = input("Enter speciality (General/Sports/Dermatology/Oncology/Paediatrics/Radiology/Obs/Gynae/Cardiology/Psychiatry/ENT/Other): ")
+    inputDate = input("Enter desired appointment date (YYYY-MM-DD): ")
+    cur.execute("""
+    SELECT s.slotID, s.startTime, s.endTime, d.fullName AS 'Doctor'
+    FROM Slot s, Doctor d
+    WHERE s.doctorID = d.doctorID
+    AND DATE(s.startTime) = %s
+    AND s.isAvailable = True
+    AND NOT EXISTS (
+        SELECT *
+        FROM Appointment a, Patient p
+        WHERE a.patientID = p.patientID
+        AND a.patientID = %s
+        AND s.startTime = a.startTime )
+    ;
+    """)
+    formatSQL()
+
+
 # FR9 - Get and validate that DOB is in the past < 05-12-2025
 def validateDOB():
     valid = False
@@ -129,9 +151,9 @@ def displayAllDoctors():
     """)
     formatSQL()
 
-
 # FR3 - Display all the user's booked appointments
 def displayBookedAppts(currentUserID):
+
     cur.execute("""
     SELECT a.apptID, s.startTime, s.endTime, d.fullName AS 'Doctor', d.roomNo, d.speciality, a.note
     FROM Slot s, Doctor d, Appointment a
@@ -179,4 +201,4 @@ def addAppointment(currentUserID, chosenSlotID):
 # displayAllDoctors()
 
 updateAvailability(1)
-testing()
+
