@@ -129,23 +129,6 @@ def displayAllDoctors():
     """)
     formatSQL()
 
-# FR4: Displays doctors with less than 5 booked appointments
-def displayMostAvailableDoctors():
-    cur.execute("""
-    SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(s.isAvailable)
-    FROM Doctor d, Slot s
-    WHERE d.doctorID = s.doctorID
-    AND s.isAvailable = 0
-    HAVING COUNT(s.isAvailable) < 5;
-    """)
-    formatSQL()
-
-def leastBusy():
-    cur.execute("""
-    SELECT *
-    FROM Slot;
-    """)
-    formatSQL()
 
 # FR3 - Display all the user's booked appointments
 def displayBookedAppts(currentUserID):
@@ -157,6 +140,19 @@ def displayBookedAppts(currentUserID):
     AND a.patientID = '%s'
     ORDER BY s.startTime ASC;
     """, (currentUserID,))
+    formatSQL()
+
+# FR4: Displays doctors with more than 5 available appointments
+def displayMostAvailableDoctors():
+    cur.execute("""
+
+    SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(s.slotID) AS 'No. of appointments'
+    FROM Doctor d, Slot s
+    WHERE s.doctorID = d.doctorID
+    AND s.isAvailable = True
+    GROUP BY d.doctorID
+    HAVING COUNT(s.slotID) > 5;
+    """)          
     formatSQL()
 
 # FR12 - Update availability of slot when it is chosen for booking
@@ -183,6 +179,4 @@ def addAppointment(currentUserID, chosenSlotID):
 # displayAllDoctors()
 
 updateAvailability(1)
-leastBusy()
-displayMostAvailableDoctors()
-
+testing()
