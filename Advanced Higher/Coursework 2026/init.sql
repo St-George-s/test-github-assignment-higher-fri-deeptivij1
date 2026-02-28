@@ -6,7 +6,7 @@ USE project1;
 -- FR1: Create and insert initial values into database
 -- CREATE statements
 CREATE TABLE IF NOT EXISTS Doctor(
-  doctorID INT PRIMARY KEY AUTO_INCREMENT,
+  doctorID INT AUTO_INCREMENT PRIMARY KEY,
   fullName VARCHAR(50) NOT NULL,
   speciality VARCHAR(20) NOT NULL,
   roomNo INT NOT NULL,
@@ -271,11 +271,9 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
 
 
-INSERT INTO Appointment(slotID, patientID, note) VALUES
-(1, 1, "Hello");
-
 SELECT *
-FROM Appointment;
+FROM Patient;
+
 
 
 
