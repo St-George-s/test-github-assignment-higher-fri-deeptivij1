@@ -1,6 +1,4 @@
 import mysql.connector
-from dataclasses import dataclass
-from typing import List, Optional
 from datetime import datetime, date
 
 
@@ -42,7 +40,7 @@ def displayMenu():
 # -------------------------------
 # Format SQL query results
 # -------------------------------
-def formatSQL():
+def formatSQL(cur):
     cols = [d[0] for d in cur.description]
     print(" | ".join(cols))
     for row in cur.fetchall():
@@ -70,6 +68,7 @@ def displayNonConflictingSlots(currentUserID, inputSpeciality, inputDate):
     ORDER BY s.startTime ASC;
                 
     """, (inputSpeciality, inputDate,currentUserID,))
+    print("")
     formatSQL()
 
 # FR3 - Display all the user's booked appointments
@@ -84,6 +83,7 @@ def displayBookedAppts(currentUserID):
     ORDER BY s.startTime ASC;
                 
     """, (currentUserID,))
+    print("")
     formatSQL()
 
 # FR4: Displays doctors with more than 5 available appointments
@@ -165,9 +165,8 @@ def updateAvailability(chosenSlotID):
     """, (chosenSlotID,))
     conn.commit()
 
-#  FR12 - Insert row into Appointment table after slot is chosen, including optional note
-def addAppointment(currentUserID, chosenSlotID):
-    inputNote = input("Add optional note (enter space to leave blank): ")
+#  FR12 - Insert row into Appointment table after slot is chosen, including optional note 
+def addAppointment(currentUserID, chosenSlotID, inputNote):
     cur.execute("""
                 
     INSERT INTO Appointment(slotID, patientID, note)
@@ -184,6 +183,7 @@ def displayAllDoctors():
     FROM Doctor d;
                 
     """)
+    print("")
     formatSQL()
 
 # -------------------------------
@@ -236,13 +236,14 @@ def main():
             # Book a slot
             chosenSlotID = int(input("Enter slot ID of appointment to book: "))
             updateAvailability(chosenSlotID)
-            addAppointment(currentUserID, chosenSlotID)
+            inputNote = input("Add optional note (Enter space to leave blank): ")
+            addAppointment(currentUserID, chosenSlotID, inputNote)
             print("Appointment booked successfully!")
 
         # -------------------------------
         # 2. View all doctors
         # -------------------------------
-        if choice == '2':
+        elif choice == '2':
             displayAllDoctors()
 
         # -------------------------------
@@ -254,23 +255,22 @@ def main():
         # -------------------------------
         # 4. Find most available doctors
         # -------------------------------
-        if choice == '4':
+        elif choice == '4':
             displayMostAvailableDoctors()
         
         # -------------------------------
         # 5. Quit program
         # -------------------------------
-        if choice == '5':
-            close_db()
+        elif choice == '5':
+            print("Thank you. Goodbye.")
+            close_db(conn, cur)
             break
 
-        if choice not in (1,2,3,4,5):
-            print("Invalid choice. Please select a valid menu option.")
 
 # Run
 conn, cur = open_db()
 main()
-close_db()
+
 
             
 

@@ -271,10 +271,15 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
 
 
-SELECT *
-FROM Patient;
-
-
+INSERT INTO Appointment(slotID, patientID, note) VALUES
+(1,1, "test"),
+(5,1,"test"),
+(10,1, "test"),
+(15,1, "test"),
+(20,2, "test"),
+(25,2, "test"),
+(30,2, "test"),
+(35,2, "test");
 
 
 
