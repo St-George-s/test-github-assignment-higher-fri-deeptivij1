@@ -1,7 +1,6 @@
 import mysql.connector
 from datetime import datetime, date
 
-
 # -------------------------------
 # Database configuration
 # -------------------------------
@@ -266,8 +265,9 @@ def main():
             close_db(conn, cur)
             break
 
-
+# -------------------------------
 # Run
+# -------------------------------
 conn, cur = open_db()
 main()
 
