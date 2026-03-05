@@ -1,0 +1,8 @@
+Task 2: database design and development
+
+
+PART A 
+2a: Entity occurence diagram on OneNote Extra section
+
+PART B
+2b: code written on main.sql
