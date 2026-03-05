@@ -1,15 +1,19 @@
+# -------------------------------
+# Imports
+# -------------------------------
 import mysql.connector
 from datetime import datetime, date
 
+# FR5 - Design of connection to database
 # -------------------------------
 # Database configuration
 # -------------------------------
 DB_CONFIG = {
-    "host": "127.0.0.1",
-    "user": "student",
-    "password": "studentpw",
-    "database": "project1",
-    "port": 3306
+    "host": "127.0.0.1",       # Address of mySQL server
+    "user": "student",         # Username
+    "password": "studentpw",   # Password 
+    "database": "project1",    # Name of database being used
+    "port": 3306               # Default port number
 }
 
 # -------------------------------
@@ -36,9 +40,9 @@ def displayMenu():
     5. Quit program
     """)
 
-# -------------------------------
-# Format SQL query results
-# -------------------------------
+# -----------------------------------------------
+# Format SQL query results - provided by teacher
+# -----------------------------------------------
 def formatSQL(cur):
     cols = [d[0] for d in cur.description]
     print(" | ".join(cols))
@@ -49,7 +53,7 @@ def formatSQL(cur):
 # Functional Requirements
 # -------------------------------
 # FR2 - Display all available slots which don't coincide with user's previously booked appointments
-def displayNonConflictingSlots(currentUserID, inputSpeciality, inputDate):
+def displayNonConflictingSlots(cur, currentUserID, inputSpeciality, inputDate):
     cur.execute("""
                 
     SELECT s.slotID, s.startTime, s.endTime, d.fullName AS 'Doctor'
@@ -71,7 +75,7 @@ def displayNonConflictingSlots(currentUserID, inputSpeciality, inputDate):
     formatSQL()
 
 # FR3 - Display all the user's booked appointments
-def displayBookedAppts(currentUserID):
+def displayBookedAppts(cur, currentUserID):
     cur.execute("""
                 
     SELECT a.apptID, s.startTime, s.endTime, d.fullName AS 'Doctor', d.roomNo, d.speciality, a.note
@@ -86,7 +90,7 @@ def displayBookedAppts(currentUserID):
     formatSQL()
 
 # FR4: Displays doctors with more than 5 available appointments
-def displayMostAvailableDoctors():
+def displayMostAvailableDoctors(cur):
     cur.execute("""
 
     SELECT d.doctorID, d.fullName AS 'Doctor', d.speciality, COUNT(s.slotID) AS 'No. of appointments'
@@ -135,7 +139,7 @@ def validateApptDate(inputDate):
         return False
 
 # FR10 - Sign in: find and store the patientID in a variable
-def signIn(inputName, inputDOB):
+def signIn(cur, inputName, inputDOB):
     cur.execute("""
                 
     SELECT p.patientID
@@ -154,7 +158,7 @@ def signIn(inputName, inputDOB):
         return currentUserID
     
 # FR11 - Update availability of slot when it is chosen for booking
-def updateAvailability(chosenSlotID):
+def updateAvailability(conn, cur, chosenSlotID):
     cur.execute("""
                 
     UPDATE Slot s
@@ -165,7 +169,7 @@ def updateAvailability(chosenSlotID):
     conn.commit()
 
 #  FR12 - Insert row into Appointment table after slot is chosen, including optional note 
-def addAppointment(currentUserID, chosenSlotID, inputNote):
+def addAppointment(conn, cur, currentUserID, chosenSlotID, inputNote):
     cur.execute("""
                 
     INSERT INTO Appointment(slotID, patientID, note)
@@ -175,7 +179,7 @@ def addAppointment(currentUserID, chosenSlotID, inputNote):
     conn.commit()
 
 # FR13 - Select and display info about all doctors in the clinic
-def displayAllDoctors():
+def displayAllDoctors(cur):
     cur.execute("""
                 
     SELECT d.fullName AS 'Doctor', d.speciality, d.roomNo
@@ -185,10 +189,13 @@ def displayAllDoctors():
     print("")
     formatSQL()
 
+# FR6 + FR7 -  User Interface
 # -------------------------------
 # Main program
 # -------------------------------
 def main():
+    # Open database
+    conn, cur = open_db()
     # Sign-in process
     currentUserID = None
     # Repeat until user is found
@@ -268,10 +275,7 @@ def main():
 # -------------------------------
 # Run
 # -------------------------------
-conn, cur = open_db()
 main()
-
-
             
 
 

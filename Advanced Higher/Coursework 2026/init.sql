@@ -1,3 +1,4 @@
+-- Resets database everytime it is run
 DROP DATABASE project1;
 
 CREATE DATABASE IF NOT EXISTS project1;
@@ -10,7 +11,8 @@ CREATE TABLE IF NOT EXISTS Doctor(
   fullName VARCHAR(50) NOT NULL,
   speciality VARCHAR(20) NOT NULL,
   roomNo INT NOT NULL,
-  CONSTRAINT chk_speciality CHECK (speciality IN ('General', 'Sports', 'Dermatology', 'Oncology', 'Paediatrics', 'Radiology', 'Obs/Gynae', 'Cardiology', 'Psychiatry', 'ENT', 'Other'))
+  CONSTRAINT chk_speciality CHECK (speciality IN ('General', 'Sports', 'Dermatology', 'Oncology', 
+  'Paediatrics', 'Radiology', 'Obs/Gynae', 'Cardiology', 'Psychiatry', 'ENT', 'Other'))
 );
 
 CREATE TABLE IF NOT EXISTS Patient(
@@ -281,6 +283,5 @@ INSERT INTO Appointment(slotID, patientID, note) VALUES
 (30,2, "test"),
 (35,2, "test");
 
-
-
-
+SELECT *
+FROM Appointment;
