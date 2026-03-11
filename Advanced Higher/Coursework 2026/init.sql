@@ -43,6 +43,11 @@ CREATE TABLE IF NOT EXISTS Appointment(
   FOREIGN KEY (patientID) REFERENCES Patient(patientID)
 );
 
+
+
+
+
+
 -- INSERT statements
 INSERT INTO Doctor(fullName, speciality, roomNo) VALUES
 ('Dr. Alice Morgan','General',101),

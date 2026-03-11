@@ -16,13 +16,13 @@ DB_CONFIG = {
     "port": 3306               # Default port number
 }
 
-# -------------------------------
-# Database helpers
-# -------------------------------
 def open_db():
-    conn = mysql.connector.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    return conn, cur
+    try:
+        conn = mysql.connector.connect(**DB_CONFIG)
+        cur = conn.cursor()
+        return conn, cur
+    except:
+        print("Database connection error")
 
 def close_db(conn, cur):
     cur.close()
@@ -71,8 +71,8 @@ def displayNonConflictingSlots(cur, currentUserID, inputSpeciality, inputDate):
     ORDER BY s.startTime ASC;
                 
     """, (inputSpeciality, inputDate,currentUserID,))
-    print("")
-    formatSQL()
+    print("") 
+    formatSQL(cur)
 
 # FR3 - Display all the user's booked appointments
 def displayBookedAppts(cur, currentUserID):
@@ -87,7 +87,7 @@ def displayBookedAppts(cur, currentUserID):
                 
     """, (currentUserID,))
     print("")
-    formatSQL()
+    formatSQL(cur)
 
 # FR4: Displays doctors with more than 5 available appointments
 def displayMostAvailableDoctors(cur):
@@ -101,9 +101,9 @@ def displayMostAvailableDoctors(cur):
     HAVING COUNT(s.slotID) > 5;
                 
     """)          
-    formatSQL()
+    formatSQL(cur)
 
-# FR8 - Checks if DOB is in the past < 05-12-2025
+# FR8 - Validate that the DOB is in the past < 05-12-2025
 def validateDOB(inputDOB):
     try:
         # Converts user input to datetime without time part
@@ -120,7 +120,7 @@ def validateDOB(inputDOB):
     else:
         return False
 
-# FR9 - Get and validate that the desired appointment date is in range
+# FR9 - Validate that the desired appointment date is in range
 def validateApptDate(inputDate):
     try: 
         # Converts user input to datetime without time part
@@ -187,7 +187,7 @@ def displayAllDoctors(cur):
                 
     """)
     print("")
-    formatSQL()
+    formatSQL(cur)
 
 # FR6 + FR7 -  User Interface
 # -------------------------------
@@ -208,7 +208,7 @@ def main():
             continue # Ask for input again
 
         # Attempt to sign in with valid DOB + name
-        currentUserID = signIn(inputName, inputDOB)
+        currentUserID = signIn(cur,inputName, inputDOB)
         if currentUserID == None:
             print("User not found. Please check full name and DOB and try again.")
             
@@ -237,32 +237,32 @@ def main():
                     print("Invalid date. Please enter a date between 2025-12-01 and 2025-12-05. ")
 
             # Show non-conflicting available slots
-            displayNonConflictingSlots(currentUserID, inputSpeciality, inputDate)
+            displayNonConflictingSlots(cur, currentUserID, inputSpeciality, inputDate)
 
             # Book a slot
             chosenSlotID = int(input("Enter slot ID of appointment to book: "))
-            updateAvailability(chosenSlotID)
+            updateAvailability(conn, cur, chosenSlotID)
             inputNote = input("Add optional note (Enter space to leave blank): ")
-            addAppointment(currentUserID, chosenSlotID, inputNote)
+            addAppointment(conn, cur, currentUserID, chosenSlotID, inputNote)
             print("Appointment booked successfully!")
 
         # -------------------------------
         # 2. View all doctors
         # -------------------------------
         elif choice == '2':
-            displayAllDoctors()
+            displayAllDoctors(cur)
 
         # -------------------------------
         # 3. View booked appointments
         # -------------------------------
         if choice == '3':
-            displayBookedAppts(currentUserID)
+            displayBookedAppts(cur, currentUserID)
     
         # -------------------------------
         # 4. Find most available doctors
         # -------------------------------
         elif choice == '4':
-            displayMostAvailableDoctors()
+            displayMostAvailableDoctors(cur)
         
         # -------------------------------
         # 5. Quit program
@@ -270,7 +270,7 @@ def main():
         elif choice == '5':
             print("Thank you. Goodbye.")
             close_db(conn, cur)
-            break
+            break 
 
 # -------------------------------
 # Run
