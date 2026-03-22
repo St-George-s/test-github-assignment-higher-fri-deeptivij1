@@ -4,15 +4,6 @@
 import mysql.connector
 from datetime import datetime, date
 
-# def test(cur):
-#     cur.execute("""
-#         SELECT *
-#         FROM Doctor;
-#         """)
-#     formatSQL(cur)
-
-
-
 
 # FR5 - Connection to database
 # -------------------------------
@@ -297,10 +288,11 @@ def main():
 # -------------------------------
 # Run
 # -------------------------------
-main()       
+# main()       
 
 conn, cur = open_db()
-displayMostAvailableDoctors(cur)
 
+print(signIn(cur, "Oliver Smith", "2023-04-12"))   
+# Expected: patientID (e.g., 1)
 
-        
+print(signIn(cur, "Oliver Smith", "1999-01-01"))   # Expected: None

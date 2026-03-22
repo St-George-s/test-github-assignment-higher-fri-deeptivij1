@@ -1,7 +1,6 @@
 USE project1;
 
-UPDATE Slot
-SET isAvailable = False
-WHERE doctorID = 1;
-
+SELECT isAvailable 
+FROM Slot 
+WHERE slotID = 1;
 
