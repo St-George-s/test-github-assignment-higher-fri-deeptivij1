@@ -4,7 +4,17 @@
 import mysql.connector
 from datetime import datetime, date
 
-# FR5 - Design of connection to database
+# def test(cur):
+#     cur.execute("""
+#         SELECT *
+#         FROM Doctor;
+#         """)
+#     formatSQL(cur)
+
+
+
+
+# FR5 - Connection to database
 # -------------------------------
 # Database configuration
 # -------------------------------
@@ -27,27 +37,6 @@ def open_db():
 def close_db(conn, cur):
     cur.close()
     conn.close()
-
-# -------------------------------
-# Menu
-# -------------------------------
-def displayMenu():
-    print("""\n -- Appointment System Menu --
-    1. Book appointment
-    2. View list of all doctors at clinic
-    3. View booked appointments
-    4. Find most available doctors
-    5. Quit program
-    """)
-
-# -----------------------------------------------
-# Format SQL query results - provided by teacher
-# -----------------------------------------------
-def formatSQL(cur):
-    cols = [d[0] for d in cur.description]
-    print(" | ".join(cols))
-    for row in cur.fetchall():
-        print(" | ".join(str(x) for x in row))
 
 # -------------------------------
 # Functional Requirements
@@ -74,7 +63,7 @@ def displayNonConflictingSlots(cur, currentUserID, inputSpeciality, inputDate):
     print("") 
     formatSQL(cur)
 
-# FR3 - Display all the user's booked appointments
+# FR3 - Display the user's booked appointments
 def displayBookedAppts(cur, currentUserID):
     cur.execute("""
                 
@@ -89,7 +78,8 @@ def displayBookedAppts(cur, currentUserID):
     print("")
     formatSQL(cur)
 
-# FR4: Displays doctors with more than 5 available appointments
+
+# FR4: Display doctors with more than 5 available appointments
 def displayMostAvailableDoctors(cur):
     cur.execute("""
 
@@ -106,13 +96,13 @@ def displayMostAvailableDoctors(cur):
 # FR8 - Validate that the DOB is in the past < 05-12-2025
 def validateDOB(inputDOB):
     try:
-        # Converts user input to datetime without time part
+        # Converts string to datetime without time part
         inputDOB = datetime.strptime(inputDOB,"%Y-%m-%d").date()  
     except:
         # If conversion doesn't work (incorrect format, length etc.)
         return False
     
-    # Create cutoff date to compare
+    # Create cutoff date object for comparison
     cutoff = date(2025, 12, 5)
 
     if inputDOB < cutoff:
@@ -129,7 +119,7 @@ def validateApptDate(inputDate):
         # If conversion doesn't work (incorrect format, length etc.)
         return False
     
-    # Valid range: 1 Dec - 5 Dec 2025
+    # Create valid range: 1 Dec - 5 Dec 2025
     start = date(2025, 12, 1)
     end = date(2025, 12, 5)
 
@@ -154,6 +144,7 @@ def signIn(cur, inputName, inputDOB):
     if result == []:
         return None
     else:
+    # If patientID is found
         currentUserID = result[0][0]
         return currentUserID
     
@@ -166,7 +157,7 @@ def updateAvailability(conn, cur, chosenSlotID):
     WHERE s.slotID = %s;
                 
     """, (chosenSlotID,))
-    conn.commit()
+    conn.commit() # Save changes to database
 
 #  FR12 - Insert row into Appointment table after slot is chosen, including optional note 
 def addAppointment(conn, cur, currentUserID, chosenSlotID, inputNote):
@@ -176,9 +167,9 @@ def addAppointment(conn, cur, currentUserID, chosenSlotID, inputNote):
     VALUES(%s, %s, %s);
                 
     """, (chosenSlotID, currentUserID, inputNote))
-    conn.commit()
+    conn.commit() # Save changes to database
 
-# FR13 - Select and display info about all doctors in the clinic
+# FR13 - Display info about all doctors in the clinic
 def displayAllDoctors(cur):
     cur.execute("""
                 
@@ -189,15 +180,38 @@ def displayAllDoctors(cur):
     print("")
     formatSQL(cur)
 
+
 # FR6 + FR7 -  User Interface
+# -----------------------------------------------
+# Format SQL query results - provided by teacher
+# -----------------------------------------------
+def formatSQL(cur):
+    cols = [d[0] for d in cur.description]
+    print(" | ".join(cols))
+    for row in cur.fetchall():
+        print(" | ".join(str(x) for x in row))
+
 # -------------------------------
-# Main program
+# Menu
 # -------------------------------
+def displayMenu():
+    print("""\n -- Appointment System Menu --
+    1. Book appointment
+    2. View list of all doctors at clinic
+    3. View booked appointments
+    4. Find most available doctors
+    5. Quit program
+    """)
+
+# # -------------------------------
+# # Main program
+# # -------------------------------
 def main():
     # Open database
     conn, cur = open_db()
     # Sign-in process
     currentUserID = None
+
     # Repeat until user is found
     while currentUserID == None:
         inputName = input("Enter your full name: ")
@@ -228,7 +242,7 @@ def main():
             inputSpeciality = input(
                 "Enter speciality (General/Sports/Dermatology/Oncology/Paediatrics/Radiology/Obs/Gynae/Cardiology/Psychiatry/ENT/Other): ")
             
-            # Validate appointment date
+            # Validate appointment date input
             while True:
                 inputDate = input("Enter desired appointment date (YYYY-MM-DD):")
                 if validateApptDate(inputDate) == True:
@@ -239,12 +253,17 @@ def main():
             # Show non-conflicting available slots
             displayNonConflictingSlots(cur, currentUserID, inputSpeciality, inputDate)
 
-            # Book a slot
+            # Choose a slot
             chosenSlotID = int(input("Enter slot ID of appointment to book: "))
+
+            # Mark slot unavailable
             updateAvailability(conn, cur, chosenSlotID)
+            
+            # Get note and insert appointment record
             inputNote = input("Add optional note (Enter space to leave blank): ")
             addAppointment(conn, cur, currentUserID, chosenSlotID, inputNote)
             print("Appointment booked successfully!")
+
 
         # -------------------------------
         # 2. View all doctors
@@ -252,17 +271,20 @@ def main():
         elif choice == '2':
             displayAllDoctors(cur)
 
+
         # -------------------------------
         # 3. View booked appointments
         # -------------------------------
         if choice == '3':
             displayBookedAppts(cur, currentUserID)
     
+
         # -------------------------------
         # 4. Find most available doctors
         # -------------------------------
         elif choice == '4':
             displayMostAvailableDoctors(cur)
+        
         
         # -------------------------------
         # 5. Quit program
@@ -275,8 +297,10 @@ def main():
 # -------------------------------
 # Run
 # -------------------------------
-main()
-            
+main()       
+
+conn, cur = open_db()
+displayMostAvailableDoctors(cur)
 
 
         
