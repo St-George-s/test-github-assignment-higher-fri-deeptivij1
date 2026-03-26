@@ -266,7 +266,7 @@ def main():
         # -------------------------------
         # 3. View booked appointments
         # -------------------------------
-        if choice == '3':
+        elif choice == '3':
             displayBookedAppts(cur, currentUserID)
     
 
@@ -288,11 +288,6 @@ def main():
 # -------------------------------
 # Run
 # -------------------------------
-# main()       
+main()
 
-conn, cur = open_db()
 
-print(signIn(cur, "Oliver Smith", "2023-04-12"))   
-# Expected: patientID (e.g., 1)
-
-print(signIn(cur, "Oliver Smith", "1999-01-01"))   # Expected: None

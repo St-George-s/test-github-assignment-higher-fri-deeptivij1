@@ -1,6 +1,5 @@
--- Resets database every time it is run
+-- Resets database everytime it is run
 DROP DATABASE project1;
-
 CREATE DATABASE IF NOT EXISTS project1;
 USE project1;
 
@@ -11,8 +10,7 @@ CREATE TABLE IF NOT EXISTS Doctor(
   fullName VARCHAR(50) NOT NULL,
   speciality VARCHAR(20) NOT NULL,
   roomNo INT NOT NULL,
-  CONSTRAINT chk_speciality CHECK (speciality IN ('General', 'Sports', 'Dermatology', 'Oncology', 
-  'Paediatrics', 'Radiology', 'Obs/Gynae', 'Cardiology', 'Psychiatry', 'ENT', 'Other')));
+  CONSTRAINT chk_speciality CHECK (speciality IN ('General', 'Sports', 'Dermatology', 'Oncology', 'Paediatrics', 'Radiology', 'Obs/Gynae', 'Cardiology', 'Psychiatry', 'ENT', 'Other')));
 
 CREATE TABLE IF NOT EXISTS Patient(
   patientID INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,6 +18,7 @@ CREATE TABLE IF NOT EXISTS Patient(
   dob DATE NOT NULL,
   email VARCHAR(70) NOT NULL,
   CONSTRAINT chk_dob CHECK (dob < DATE '2025-12-05'));
+
 
 CREATE TABLE IF NOT EXISTS Slot(
   slotID INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,15 +30,16 @@ CREATE TABLE IF NOT EXISTS Slot(
   CONSTRAINT chk_endTime CHECK (endTime >= '2025-12-01 09:30:00' and endTime <= '2025-12-05 17:00:00'),
   FOREIGN KEY (doctorID) REFERENCES Doctor(doctorID));
 
+
 CREATE TABLE IF NOT EXISTS Appointment(
   apptID INT AUTO_INCREMENT PRIMARY KEY,
   slotID INT NOT NULL,
   patientID INT NOT NULL,
   note VARCHAR(70),
   FOREIGN KEY (slotID) REFERENCES Slot(slotID),
-  FOREIGN KEY (patientID) REFERENCES Patient(patientID));
+  FOREIGN KEY (patientID) REFERENCES Patient(patientID)); 
 
-
+  
 -- INSERT statements
 INSERT INTO Doctor(fullName, speciality, roomNo) VALUES
 ('Dr. Alice Morgan','General',101),
@@ -60,6 +60,7 @@ INSERT INTO Doctor(fullName, speciality, roomNo) VALUES
 ('Dr. Priya Nair','Other',116),
 ('Dr. Quentin Blake','Other',117),
 ('Dr. Rosa Martinez','Other',118);
+
 
 INSERT INTO Patient(fullName, dob, email) VALUES
 ('Oliver Smith','2023-04-12','oliver.smith@example.com'),
@@ -122,6 +123,7 @@ INSERT INTO Patient(fullName, dob, email) VALUES
 ('Rosario De Luca','1966-08-31','rosario.deluca@example.com'),
 ('Hector Salinas','1983-04-07','hector.salinas@example.com'),
 ('Sunita Malhotra','1976-12-13','sunita.malhotra@example.com');
+
 
 INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (3,'2025-12-01 09:00:00','2025-12-01 09:30:00',True),
@@ -270,20 +272,3 @@ INSERT INTO Slot(doctorID, startTime, endTime, isAvailable) VALUES
 (14,'2025-12-05 16:30:00','2025-12-05 17:00:00',True);
 
 
--- INSERT INTO Appointment(slotID, patientID, note) VALUES
--- (1,1, "FR3 implementation (1)"),
--- (8,1,"FR3 implementation (2)"),
--- (40,1, "FR3 implementation (3)");
-
-
-SELECT *
-FROM Doctor;
-
-SELECT *
-FROM Patient;
-
-SELECT *
-FROM Slot;
-
-SELECT *
-FROM Appointment;
