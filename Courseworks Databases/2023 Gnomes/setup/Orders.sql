@@ -1,0 +1,128 @@
+CREATE TABLE Orders (
+    orderID VARCHAR(7) NOT NULL PRIMARY KEY,
+    orderDate DATE NOT NULL,
+    customerID VARCHAR(5) NOT NULL,
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID)
+);
+
+-- The following may be added to the CREATE statement
+-- Primary Key Syntax (added after field name and NOT NULL)
+--     PRIMARY KEY (fieldName)
+--          or for compound PK
+--     CONSTRAINT PK_compoundFieldName PRIMARY KEY (field1,field2)
+-- Foreign Key Syntax (added after field list)
+--     FOREIGN KEY (field name) REFERENCES tableName(fieldName)
+-- Text Field Max Size
+--     Edit (255) to required length
+-- Validation of length of text (added after create statement as new statement
+--     CHECK (CHAR_LENGTH(fieldName) > value)
+-- Range Check (added after field list)
+--     CHECK (fieldName >= value)
+--     CHECK (fieldName >= value AND fieldName <= value2)
+-- Restricted choice
+--     CHECK(fieldName in ('value1','value2','value3')) 
+
+-- Note
+-- At N5 Check constraints (that are ignored by a MySQL server) 
+-- are being used instead of triggers.
+
+INSERT INTO Orders VALUES("ord0001","2022-02-02","c0001");
+INSERT INTO Orders VALUES("ord0002","2022-02-02","c0001");
+INSERT INTO Orders VALUES("ord0003","2022-02-02","c0002");
+INSERT INTO Orders VALUES("ord0004","2022-02-02","c0002");
+INSERT INTO Orders VALUES("ord0005","2022-02-03","c0002");
+INSERT INTO Orders VALUES("ord0006","2022-02-03","c0002");
+INSERT INTO Orders VALUES("ord0007","2022-02-03","c0003");
+INSERT INTO Orders VALUES("ord0008","2022-02-03","c0006");
+INSERT INTO Orders VALUES("ord0009","2022-02-03","c0010");
+INSERT INTO Orders VALUES("ord0010","2022-02-03","c0016");
+INSERT INTO Orders VALUES("ord0011","2022-02-03","c0023");
+INSERT INTO Orders VALUES("ord0012","2022-02-03","c0008");
+INSERT INTO Orders VALUES("ord0013","2022-02-04","c0012");
+INSERT INTO Orders VALUES("ord0014","2022-02-05","c0019");
+INSERT INTO Orders VALUES("ord0015","2022-02-05","c0024");
+INSERT INTO Orders VALUES("ord0016","2022-02-05","c0029");
+INSERT INTO Orders VALUES("ord0017","2022-02-05","c0033");
+INSERT INTO Orders VALUES("ord0018","2022-02-07","c0036");
+INSERT INTO Orders VALUES("ord0019","2022-02-07","c0040");
+INSERT INTO Orders VALUES("ord0020","2022-02-09","c0043");
+INSERT INTO Orders VALUES("ord0021","2022-02-09","c0047");
+INSERT INTO Orders VALUES("ord0022","2022-02-09","c0052");
+INSERT INTO Orders VALUES("ord0023","2022-02-09","c0055");
+INSERT INTO Orders VALUES("ord0024","2022-02-09","c0058");
+INSERT INTO Orders VALUES("ord0025","2022-02-12","c0062");
+INSERT INTO Orders VALUES("ord0026","2022-02-12","c0067");
+INSERT INTO Orders VALUES("ord0027","2022-02-12","c0070");
+INSERT INTO Orders VALUES("ord0028","2022-02-12","c0074");
+INSERT INTO Orders VALUES("ord0029","2022-02-12","c0081");
+INSERT INTO Orders VALUES("ord0030","2022-02-14","c0083");
+INSERT INTO Orders VALUES("ord0031","2022-02-14","c0084");
+INSERT INTO Orders VALUES("ord0032","2022-02-14","c0088");
+INSERT INTO Orders VALUES("ord0033","2022-02-14","c0090");
+INSERT INTO Orders VALUES("ord0034","2022-02-14","c0003");
+INSERT INTO Orders VALUES("ord0035","2022-02-14","c0008");
+INSERT INTO Orders VALUES("ord0036","2022-02-14","c0010");
+INSERT INTO Orders VALUES("ord0037","2022-02-14","c0012");
+INSERT INTO Orders VALUES("ord0038","2022-02-14","c0015");
+INSERT INTO Orders VALUES("ord0039","2022-02-14","c0016");
+INSERT INTO Orders VALUES("ord0040","2022-02-20","c0019");
+INSERT INTO Orders VALUES("ord0041","2022-02-20","c0022");
+INSERT INTO Orders VALUES("ord0042","2022-02-23","c0024");
+INSERT INTO Orders VALUES("ord0043","2022-02-24","c0030");
+INSERT INTO Orders VALUES("ord0044","2022-02-26","c0035");
+INSERT INTO Orders VALUES("ord0045","2022-02-26","c0042");
+INSERT INTO Orders VALUES("ord0046","2022-02-26","c0046");
+INSERT INTO Orders VALUES("ord0047","2022-02-28","c0051");
+INSERT INTO Orders VALUES("ord0048","2022-03-03","c0060");
+INSERT INTO Orders VALUES("ord0049","2022-03-03","c0067");
+INSERT INTO Orders VALUES("ord0050","2022-03-03","c0007");
+INSERT INTO Orders VALUES("ord0051","2022-03-03","c0012");
+INSERT INTO Orders VALUES("ord0052","2022-03-03","c0014");
+INSERT INTO Orders VALUES("ord0053","2022-03-03","c0020");
+INSERT INTO Orders VALUES("ord0054","2022-03-03","c0023");
+INSERT INTO Orders VALUES("ord0055","2022-03-03","c0028");
+INSERT INTO Orders VALUES("ord0056","2022-03-07","c0032");
+INSERT INTO Orders VALUES("ord0057","2022-03-08","c0037");
+INSERT INTO Orders VALUES("ord0058","2022-03-09","c0044");
+INSERT INTO Orders VALUES("ord0059","2022-03-10","c0047");
+INSERT INTO Orders VALUES("ord0060","2022-03-11","c0050");
+INSERT INTO Orders VALUES("ord0061","2022-03-14","c0054");
+INSERT INTO Orders VALUES("ord0062","2022-03-14","c0059");
+INSERT INTO Orders VALUES("ord0063","2022-03-14","c0062");
+INSERT INTO Orders VALUES("ord0064","2022-03-14","c0065");
+INSERT INTO Orders VALUES("ord0065","2022-03-22","c0066");
+INSERT INTO Orders VALUES("ord0066","2022-03-22","c0069");
+INSERT INTO Orders VALUES("ord0067","2022-03-22","c0071");
+INSERT INTO Orders VALUES("ord0068","2022-03-23","c0074");
+INSERT INTO Orders VALUES("ord0069","2022-03-24","c0080");
+INSERT INTO Orders VALUES("ord0070","2022-03-25","c0082");
+INSERT INTO Orders VALUES("ord0071","2022-03-26","c0085");
+INSERT INTO Orders VALUES("ord0072","2022-03-26","c0088");
+INSERT INTO Orders VALUES("ord0073","2022-03-26","c0090");
+INSERT INTO Orders VALUES("ord0074","2022-03-26","c0007");
+INSERT INTO Orders VALUES("ord0075","2022-03-26","c0014");
+INSERT INTO Orders VALUES("ord0076","2022-03-27","c0022");
+INSERT INTO Orders VALUES("ord0077","2022-03-28","c0026");
+INSERT INTO Orders VALUES("ord0078","2022-03-29","c0030");
+INSERT INTO Orders VALUES("ord0079","2022-03-30","c0035");
+INSERT INTO Orders VALUES("ord0080","2022-03-31","c0044");
+INSERT INTO Orders VALUES("ord0081","2022-04-01","c0047");
+INSERT INTO Orders VALUES("ord0082","2022-04-02","c0053");
+INSERT INTO Orders VALUES("ord0083","2022-04-02","c0056");
+INSERT INTO Orders VALUES("ord0084","2022-04-02","c0060");
+INSERT INTO Orders VALUES("ord0085","2022-04-02","c0065");
+INSERT INTO Orders VALUES("ord0086","2022-04-03","c0068");
+INSERT INTO Orders VALUES("ord0087","2022-04-04","c0069");
+INSERT INTO Orders VALUES("ord0088","2022-04-05","c0070");
+INSERT INTO Orders VALUES("ord0089","2022-04-05","c0071");
+INSERT INTO Orders VALUES("ord0090","2022-04-05","c0073");
+INSERT INTO Orders VALUES("ord0091","2022-04-05","c0047");
+INSERT INTO Orders VALUES("ord0092","2022-04-06","c0050");
+INSERT INTO Orders VALUES("ord0093","2022-04-06","c0055");
+INSERT INTO Orders VALUES("ord0094","2022-04-06","c0058");
+INSERT INTO Orders VALUES("ord0095","2022-04-06","c0068");
+INSERT INTO Orders VALUES("ord0096","2022-04-06","c0073");
+INSERT INTO Orders VALUES("ord0097","2022-04-07","c0079");
+INSERT INTO Orders VALUES("ord0098","2022-04-08","c0080");
+INSERT INTO Orders VALUES("ord0099","2022-04-09","c0083");
+INSERT INTO Orders VALUES("ord0100","2022-04-10","c0001");
